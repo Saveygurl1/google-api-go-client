@@ -173,9 +173,11 @@ func NewProjectsLocationsService(s *Service) *ProjectsLocationsService {
 	rs := &ProjectsLocationsService{s: s}
 	rs.Collections = NewProjectsLocationsCollectionsService(s)
 	rs.DataStores = NewProjectsLocationsDataStoresService(s)
+	rs.Evaluations = NewProjectsLocationsEvaluationsService(s)
 	rs.GroundingConfigs = NewProjectsLocationsGroundingConfigsService(s)
 	rs.Operations = NewProjectsLocationsOperationsService(s)
 	rs.RankingConfigs = NewProjectsLocationsRankingConfigsService(s)
+	rs.SampleQuerySets = NewProjectsLocationsSampleQuerySetsService(s)
 	rs.UserEvents = NewProjectsLocationsUserEventsService(s)
 	return rs
 }
@@ -187,11 +189,15 @@ type ProjectsLocationsService struct {
 
 	DataStores *ProjectsLocationsDataStoresService
 
+	Evaluations *ProjectsLocationsEvaluationsService
+
 	GroundingConfigs *ProjectsLocationsGroundingConfigsService
 
 	Operations *ProjectsLocationsOperationsService
 
 	RankingConfigs *ProjectsLocationsRankingConfigsService
+
+	SampleQuerySets *ProjectsLocationsSampleQuerySetsService
 
 	UserEvents *ProjectsLocationsUserEventsService
 }
@@ -241,6 +247,7 @@ type ProjectsLocationsCollectionsDataConnectorOperationsService struct {
 func NewProjectsLocationsCollectionsDataStoresService(s *Service) *ProjectsLocationsCollectionsDataStoresService {
 	rs := &ProjectsLocationsCollectionsDataStoresService{s: s}
 	rs.Branches = NewProjectsLocationsCollectionsDataStoresBranchesService(s)
+	rs.CompletionSuggestions = NewProjectsLocationsCollectionsDataStoresCompletionSuggestionsService(s)
 	rs.Controls = NewProjectsLocationsCollectionsDataStoresControlsService(s)
 	rs.Conversations = NewProjectsLocationsCollectionsDataStoresConversationsService(s)
 	rs.CustomModels = NewProjectsLocationsCollectionsDataStoresCustomModelsService(s)
@@ -259,6 +266,8 @@ type ProjectsLocationsCollectionsDataStoresService struct {
 	s *Service
 
 	Branches *ProjectsLocationsCollectionsDataStoresBranchesService
+
+	CompletionSuggestions *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsService
 
 	Controls *ProjectsLocationsCollectionsDataStoresControlsService
 
@@ -313,6 +322,15 @@ func NewProjectsLocationsCollectionsDataStoresBranchesOperationsService(s *Servi
 }
 
 type ProjectsLocationsCollectionsDataStoresBranchesOperationsService struct {
+	s *Service
+}
+
+func NewProjectsLocationsCollectionsDataStoresCompletionSuggestionsService(s *Service) *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsService {
+	rs := &ProjectsLocationsCollectionsDataStoresCompletionSuggestionsService{s: s}
+	return rs
+}
+
+type ProjectsLocationsCollectionsDataStoresCompletionSuggestionsService struct {
 	s *Service
 }
 
@@ -580,6 +598,7 @@ type ProjectsLocationsCollectionsOperationsService struct {
 func NewProjectsLocationsDataStoresService(s *Service) *ProjectsLocationsDataStoresService {
 	rs := &ProjectsLocationsDataStoresService{s: s}
 	rs.Branches = NewProjectsLocationsDataStoresBranchesService(s)
+	rs.CompletionSuggestions = NewProjectsLocationsDataStoresCompletionSuggestionsService(s)
 	rs.Controls = NewProjectsLocationsDataStoresControlsService(s)
 	rs.Conversations = NewProjectsLocationsDataStoresConversationsService(s)
 	rs.Models = NewProjectsLocationsDataStoresModelsService(s)
@@ -597,6 +616,8 @@ type ProjectsLocationsDataStoresService struct {
 	s *Service
 
 	Branches *ProjectsLocationsDataStoresBranchesService
+
+	CompletionSuggestions *ProjectsLocationsDataStoresCompletionSuggestionsService
 
 	Controls *ProjectsLocationsDataStoresControlsService
 
@@ -649,6 +670,15 @@ func NewProjectsLocationsDataStoresBranchesOperationsService(s *Service) *Projec
 }
 
 type ProjectsLocationsDataStoresBranchesOperationsService struct {
+	s *Service
+}
+
+func NewProjectsLocationsDataStoresCompletionSuggestionsService(s *Service) *ProjectsLocationsDataStoresCompletionSuggestionsService {
+	rs := &ProjectsLocationsDataStoresCompletionSuggestionsService{s: s}
+	return rs
+}
+
+type ProjectsLocationsDataStoresCompletionSuggestionsService struct {
 	s *Service
 }
 
@@ -778,6 +808,27 @@ type ProjectsLocationsDataStoresUserEventsService struct {
 	s *Service
 }
 
+func NewProjectsLocationsEvaluationsService(s *Service) *ProjectsLocationsEvaluationsService {
+	rs := &ProjectsLocationsEvaluationsService{s: s}
+	rs.Operations = NewProjectsLocationsEvaluationsOperationsService(s)
+	return rs
+}
+
+type ProjectsLocationsEvaluationsService struct {
+	s *Service
+
+	Operations *ProjectsLocationsEvaluationsOperationsService
+}
+
+func NewProjectsLocationsEvaluationsOperationsService(s *Service) *ProjectsLocationsEvaluationsOperationsService {
+	rs := &ProjectsLocationsEvaluationsOperationsService{s: s}
+	return rs
+}
+
+type ProjectsLocationsEvaluationsOperationsService struct {
+	s *Service
+}
+
 func NewProjectsLocationsGroundingConfigsService(s *Service) *ProjectsLocationsGroundingConfigsService {
 	rs := &ProjectsLocationsGroundingConfigsService{s: s}
 	return rs
@@ -802,6 +853,27 @@ func NewProjectsLocationsRankingConfigsService(s *Service) *ProjectsLocationsRan
 }
 
 type ProjectsLocationsRankingConfigsService struct {
+	s *Service
+}
+
+func NewProjectsLocationsSampleQuerySetsService(s *Service) *ProjectsLocationsSampleQuerySetsService {
+	rs := &ProjectsLocationsSampleQuerySetsService{s: s}
+	rs.Operations = NewProjectsLocationsSampleQuerySetsOperationsService(s)
+	return rs
+}
+
+type ProjectsLocationsSampleQuerySetsService struct {
+	s *Service
+
+	Operations *ProjectsLocationsSampleQuerySetsOperationsService
+}
+
+func NewProjectsLocationsSampleQuerySetsOperationsService(s *Service) *ProjectsLocationsSampleQuerySetsOperationsService {
+	rs := &ProjectsLocationsSampleQuerySetsOperationsService{s: s}
+	return rs
+}
+
+type ProjectsLocationsSampleQuerySetsOperationsService struct {
 	s *Service
 }
 
@@ -865,9 +937,9 @@ type GoogleApiHttpBody struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleApiHttpBody) MarshalJSON() ([]byte, error) {
+func (s GoogleApiHttpBody) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleApiHttpBody
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineLoggingErrorContext: A description of the context
@@ -892,9 +964,9 @@ type GoogleCloudDiscoveryengineLoggingErrorContext struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineLoggingErrorContext) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineLoggingErrorContext) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineLoggingErrorContext
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineLoggingErrorLog: An error log which is reported to
@@ -938,9 +1010,9 @@ type GoogleCloudDiscoveryengineLoggingErrorLog struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineLoggingErrorLog) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineLoggingErrorLog) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineLoggingErrorLog
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineLoggingHttpRequestContext: HTTP request data that
@@ -961,9 +1033,9 @@ type GoogleCloudDiscoveryengineLoggingHttpRequestContext struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineLoggingHttpRequestContext) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineLoggingHttpRequestContext) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineLoggingHttpRequestContext
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineLoggingImportErrorContext: The error payload that
@@ -998,9 +1070,9 @@ type GoogleCloudDiscoveryengineLoggingImportErrorContext struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineLoggingImportErrorContext) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineLoggingImportErrorContext) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineLoggingImportErrorContext
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineLoggingServiceContext: Describes a running service
@@ -1022,9 +1094,9 @@ type GoogleCloudDiscoveryengineLoggingServiceContext struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineLoggingServiceContext) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineLoggingServiceContext) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineLoggingServiceContext
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineLoggingSourceLocation: Indicates a location in the
@@ -1046,9 +1118,9 @@ type GoogleCloudDiscoveryengineLoggingSourceLocation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineLoggingSourceLocation) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineLoggingSourceLocation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineLoggingSourceLocation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1BatchCreateTargetSiteMetadata: Metadata related
@@ -1074,9 +1146,9 @@ type GoogleCloudDiscoveryengineV1BatchCreateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1BatchCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1BatchCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1BatchCreateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1BatchCreateTargetSitesResponse: Response message
@@ -1097,9 +1169,9 @@ type GoogleCloudDiscoveryengineV1BatchCreateTargetSitesResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1BatchCreateTargetSitesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1BatchCreateTargetSitesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1BatchCreateTargetSitesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1Condition: Defines circumstances to be checked
@@ -1124,9 +1196,9 @@ type GoogleCloudDiscoveryengineV1Condition struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1Condition) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1Condition) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1Condition
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ConditionQueryTerm: Matcher for search request
@@ -1151,9 +1223,9 @@ type GoogleCloudDiscoveryengineV1ConditionQueryTerm struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ConditionQueryTerm) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ConditionQueryTerm) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ConditionQueryTerm
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ConditionTimeRange: Used for time-dependent
@@ -1176,9 +1248,9 @@ type GoogleCloudDiscoveryengineV1ConditionTimeRange struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ConditionTimeRange) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ConditionTimeRange) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ConditionTimeRange
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1Control: Defines a conditioned behavior to
@@ -1248,9 +1320,9 @@ type GoogleCloudDiscoveryengineV1Control struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1Control) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1Control) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1Control
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ControlBoostAction: Adjusts order of products in
@@ -1282,9 +1354,9 @@ type GoogleCloudDiscoveryengineV1ControlBoostAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ControlBoostAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ControlBoostAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ControlBoostAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1ControlBoostAction) UnmarshalJSON(data []byte) error {
@@ -1327,9 +1399,9 @@ type GoogleCloudDiscoveryengineV1ControlFilterAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ControlFilterAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ControlFilterAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ControlFilterAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ControlRedirectAction: Redirects a shopper to
@@ -1352,9 +1424,9 @@ type GoogleCloudDiscoveryengineV1ControlRedirectAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ControlRedirectAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ControlRedirectAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ControlRedirectAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ControlSynonymsAction: Creates a set of terms
@@ -1377,9 +1449,9 @@ type GoogleCloudDiscoveryengineV1ControlSynonymsAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ControlSynonymsAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ControlSynonymsAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ControlSynonymsAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1CreateDataStoreMetadata: Metadata related to the
@@ -1404,9 +1476,9 @@ type GoogleCloudDiscoveryengineV1CreateDataStoreMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1CreateDataStoreMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1CreateDataStoreMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1CreateDataStoreMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1CreateEngineMetadata: Metadata related to the
@@ -1431,9 +1503,9 @@ type GoogleCloudDiscoveryengineV1CreateEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1CreateEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1CreateEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1CreateEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1CreateSchemaMetadata: Metadata for Create Schema
@@ -1457,9 +1529,9 @@ type GoogleCloudDiscoveryengineV1CreateSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1CreateSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1CreateSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1CreateSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1CreateTargetSiteMetadata: Metadata related to
@@ -1484,9 +1556,9 @@ type GoogleCloudDiscoveryengineV1CreateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1CreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1CreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1CreateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DataStore: DataStore captures global settings
@@ -1566,9 +1638,9 @@ type GoogleCloudDiscoveryengineV1DataStore struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DataStore) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DataStore) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DataStore
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DeleteDataStoreMetadata: Metadata related to the
@@ -1593,9 +1665,9 @@ type GoogleCloudDiscoveryengineV1DeleteDataStoreMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DeleteDataStoreMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DeleteDataStoreMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DeleteDataStoreMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DeleteEngineMetadata: Metadata related to the
@@ -1620,9 +1692,9 @@ type GoogleCloudDiscoveryengineV1DeleteEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DeleteEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DeleteEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DeleteEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DeleteSchemaMetadata: Metadata for DeleteSchema
@@ -1646,9 +1718,9 @@ type GoogleCloudDiscoveryengineV1DeleteSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DeleteSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DeleteSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DeleteSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DeleteTargetSiteMetadata: Metadata related to
@@ -1673,9 +1745,9 @@ type GoogleCloudDiscoveryengineV1DeleteTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DeleteTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DeleteTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DeleteTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DisableAdvancedSiteSearchMetadata: Metadata
@@ -1701,9 +1773,9 @@ type GoogleCloudDiscoveryengineV1DisableAdvancedSiteSearchMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DisableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DisableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DisableAdvancedSiteSearchMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DisableAdvancedSiteSearchResponse: Response
@@ -1731,9 +1803,10 @@ type GoogleCloudDiscoveryengineV1DocumentProcessingConfig struct {
 	// configuration based on the file type. Supported keys: * `pdf`: Override
 	// parsing config for PDF files, either digital parsing, ocr parsing or layout
 	// parsing is supported. * `html`: Override parsing config for HTML files, only
-	// digital parsing and or layout parsing are supported. * `docx`: Override
-	// parsing config for DOCX files, only digital parsing and or layout parsing
-	// are supported.
+	// digital parsing and layout parsing are supported. * `docx`: Override parsing
+	// config for DOCX files, only digital parsing and layout parsing are
+	// supported. * `pptx`: Override parsing config for PPTX files, only digital
+	// parsing and layout parsing are supported.
 	ParsingConfigOverrides map[string]GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfig `json:"parsingConfigOverrides,omitempty"`
 	// ForceSendFields is a list of field names (e.g. "ChunkingConfig") to
 	// unconditionally include in API requests. By default, fields with empty or
@@ -1748,9 +1821,9 @@ type GoogleCloudDiscoveryengineV1DocumentProcessingConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DocumentProcessingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DocumentProcessingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DocumentProcessingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfig:
@@ -1771,9 +1844,9 @@ type GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfigLayoutBased
@@ -1799,9 +1872,9 @@ type GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfigLayoutBas
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfig: Related
@@ -1827,9 +1900,9 @@ type GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfigDigitalParsi
@@ -1865,9 +1938,9 @@ type GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfigOcrParsing
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfigOcrParsingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfigOcrParsingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1DocumentProcessingConfigParsingConfigOcrParsingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1EnableAdvancedSiteSearchMetadata: Metadata
@@ -1893,9 +1966,9 @@ type GoogleCloudDiscoveryengineV1EnableAdvancedSiteSearchMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1EnableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1EnableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1EnableAdvancedSiteSearchMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1EnableAdvancedSiteSearchResponse: Response
@@ -1976,9 +2049,9 @@ type GoogleCloudDiscoveryengineV1Engine struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1Engine) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1Engine) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1Engine
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1EngineChatEngineConfig: Configurations for a
@@ -2013,9 +2086,9 @@ type GoogleCloudDiscoveryengineV1EngineChatEngineConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1EngineChatEngineConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1EngineChatEngineConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1EngineChatEngineConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1EngineChatEngineConfigAgentCreationConfig:
@@ -2053,9 +2126,9 @@ type GoogleCloudDiscoveryengineV1EngineChatEngineConfigAgentCreationConfig struc
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1EngineChatEngineConfigAgentCreationConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1EngineChatEngineConfigAgentCreationConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1EngineChatEngineConfigAgentCreationConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1EngineChatEngineMetadata: Additional information
@@ -2077,9 +2150,9 @@ type GoogleCloudDiscoveryengineV1EngineChatEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1EngineChatEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1EngineChatEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1EngineChatEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1EngineCommonConfig: Common configurations for an
@@ -2101,9 +2174,9 @@ type GoogleCloudDiscoveryengineV1EngineCommonConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1EngineCommonConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1EngineCommonConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1EngineCommonConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1EngineSearchEngineConfig: Configurations for a
@@ -2139,9 +2212,67 @@ type GoogleCloudDiscoveryengineV1EngineSearchEngineConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1EngineSearchEngineConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1EngineSearchEngineConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1EngineSearchEngineConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsMetadata: Metadata
+// related to the progress of the ImportCompletionSuggestions operation. This
+// will be returned by the google.longrunning.Operation.metadata field.
+type GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsMetadata struct {
+	// CreateTime: Operation create time.
+	CreateTime string `json:"createTime,omitempty"`
+	// FailureCount: Count of CompletionSuggestions that failed to be imported.
+	FailureCount int64 `json:"failureCount,omitempty,string"`
+	// SuccessCount: Count of CompletionSuggestions successfully imported.
+	SuccessCount int64 `json:"successCount,omitempty,string"`
+	// UpdateTime: Operation last update time. If the operation is done, this is
+	// also the finish time.
+	UpdateTime string `json:"updateTime,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "CreateTime") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "CreateTime") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsMetadata) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsMetadata
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsResponse: Response of
+// the CompletionService.ImportCompletionSuggestions method. If the long
+// running operation is done, this message is returned by the
+// google.longrunning.Operations.response field if the operation is successful.
+type GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsResponse struct {
+	// ErrorConfig: The desired location of errors incurred during the Import.
+	ErrorConfig *GoogleCloudDiscoveryengineV1ImportErrorConfig `json:"errorConfig,omitempty"`
+	// ErrorSamples: A sample of errors encountered while processing the request.
+	ErrorSamples []*GoogleRpcStatus `json:"errorSamples,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "ErrorConfig") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "ErrorConfig") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsResponse) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1ImportCompletionSuggestionsResponse
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ImportDocumentsMetadata: Metadata related to the
@@ -2172,9 +2303,9 @@ type GoogleCloudDiscoveryengineV1ImportDocumentsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ImportDocumentsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ImportDocumentsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ImportDocumentsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ImportDocumentsResponse: Response of the
@@ -2200,9 +2331,9 @@ type GoogleCloudDiscoveryengineV1ImportDocumentsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ImportDocumentsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ImportDocumentsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ImportDocumentsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ImportErrorConfig: Configuration of destination
@@ -2226,9 +2357,9 @@ type GoogleCloudDiscoveryengineV1ImportErrorConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ImportErrorConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ImportErrorConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ImportErrorConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesMetadata:
@@ -2254,9 +2385,9 @@ type GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesMetadata struct 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesResponse:
@@ -2282,9 +2413,9 @@ type GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesResponse struct 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ImportSuggestionDenyListEntriesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ImportUserEventsMetadata: Metadata related to
@@ -2313,9 +2444,9 @@ type GoogleCloudDiscoveryengineV1ImportUserEventsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ImportUserEventsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ImportUserEventsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ImportUserEventsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ImportUserEventsResponse: Response of the
@@ -2347,9 +2478,9 @@ type GoogleCloudDiscoveryengineV1ImportUserEventsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ImportUserEventsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ImportUserEventsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ImportUserEventsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1Project: Metadata and configurations for a
@@ -2382,9 +2513,9 @@ type GoogleCloudDiscoveryengineV1Project struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1Project) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1Project) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1Project
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ProjectServiceTerms: Metadata about the terms of
@@ -2428,14 +2559,66 @@ type GoogleCloudDiscoveryengineV1ProjectServiceTerms struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1ProjectServiceTerms) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1ProjectServiceTerms) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1ProjectServiceTerms
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1ProvisionProjectMetadata: Metadata associated
 // with a project provision operation.
 type GoogleCloudDiscoveryengineV1ProvisionProjectMetadata struct {
+}
+
+// GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsMetadata: Metadata
+// related to the progress of the PurgeCompletionSuggestions operation. This is
+// returned by the google.longrunning.Operation.metadata field.
+type GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsMetadata struct {
+	// CreateTime: Operation create time.
+	CreateTime string `json:"createTime,omitempty"`
+	// UpdateTime: Operation last update time. If the operation is done, this is
+	// also the finish time.
+	UpdateTime string `json:"updateTime,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "CreateTime") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "CreateTime") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsMetadata) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsMetadata
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsResponse: Response
+// message for CompletionService.PurgeCompletionSuggestions method.
+type GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsResponse struct {
+	// ErrorSamples: A sample of errors encountered while processing the request.
+	ErrorSamples []*GoogleRpcStatus `json:"errorSamples,omitempty"`
+	// PurgeSucceeded: Whether the completion suggestions were successfully purged.
+	PurgeSucceeded bool `json:"purgeSucceeded,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "ErrorSamples") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "ErrorSamples") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsResponse) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1PurgeCompletionSuggestionsResponse
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1PurgeDocumentsMetadata: Metadata related to the
@@ -2466,9 +2649,9 @@ type GoogleCloudDiscoveryengineV1PurgeDocumentsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1PurgeDocumentsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1PurgeDocumentsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1PurgeDocumentsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1PurgeDocumentsResponse: Response message for
@@ -2496,9 +2679,9 @@ type GoogleCloudDiscoveryengineV1PurgeDocumentsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1PurgeDocumentsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1PurgeDocumentsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1PurgeDocumentsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesMetadata: Metadata
@@ -2523,9 +2706,9 @@ type GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesResponse: Response
@@ -2548,9 +2731,9 @@ type GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1PurgeSuggestionDenyListEntriesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1Schema: Defines the structure and layout of a
@@ -2578,9 +2761,9 @@ type GoogleCloudDiscoveryengineV1Schema struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1Schema) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1Schema) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1Schema
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1SiteVerificationInfo: Verification information
@@ -2611,9 +2794,9 @@ type GoogleCloudDiscoveryengineV1SiteVerificationInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1SiteVerificationInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1SiteVerificationInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1SiteVerificationInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1TargetSite: A target site for the
@@ -2681,9 +2864,9 @@ type GoogleCloudDiscoveryengineV1TargetSite struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1TargetSite) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1TargetSite) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1TargetSite
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1TargetSiteFailureReason: Site search indexing
@@ -2704,9 +2887,9 @@ type GoogleCloudDiscoveryengineV1TargetSiteFailureReason struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1TargetSiteFailureReason) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1TargetSiteFailureReason) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1TargetSiteFailureReason
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1TargetSiteFailureReasonQuotaFailure: Failed due
@@ -2728,9 +2911,9 @@ type GoogleCloudDiscoveryengineV1TargetSiteFailureReasonQuotaFailure struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1TargetSiteFailureReasonQuotaFailure) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1TargetSiteFailureReasonQuotaFailure) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1TargetSiteFailureReasonQuotaFailure
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1UpdateSchemaMetadata: Metadata for UpdateSchema
@@ -2754,9 +2937,9 @@ type GoogleCloudDiscoveryengineV1UpdateSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1UpdateSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1UpdateSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1UpdateSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1UpdateTargetSiteMetadata: Metadata related to
@@ -2781,9 +2964,9 @@ type GoogleCloudDiscoveryengineV1UpdateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1UpdateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1UpdateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1UpdateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAclConfig: Access Control Configuration.
@@ -2807,9 +2990,9 @@ type GoogleCloudDiscoveryengineV1alphaAclConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAclConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAclConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAclConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswer: Defines an answer.
@@ -2828,6 +3011,8 @@ type GoogleCloudDiscoveryengineV1alphaAnswer struct {
 	//   "POTENTIAL_POLICY_VIOLATION" - The potential policy violation case. Google
 	// skips the answer if there is a potential policy violation detected. This
 	// includes content that may be violent or toxic.
+	//   "NO_RELEVANT_CONTENT" - The no relevant content case. Google skips the
+	// answer if there is no relevant content in the retrieved search results.
 	AnswerSkippedReasons []string `json:"answerSkippedReasons,omitempty"`
 	// AnswerText: The textual answer.
 	AnswerText string `json:"answerText,omitempty"`
@@ -2870,9 +3055,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswer struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswer) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswer) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswer
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerCitation: Citation info for a
@@ -2898,9 +3083,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerCitation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerCitation) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerCitation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerCitation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerCitationSource: Citation source.
@@ -2920,9 +3105,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerCitationSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerCitationSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerCitationSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerCitationSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfo: Query
@@ -2943,9 +3128,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfoQueryClassificat
@@ -2973,9 +3158,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfoQueryClassific
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfoQueryClassificationInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfoQueryClassificationInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerQueryUnderstandingInfoQueryClassificationInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerReference: Reference.
@@ -2997,9 +3182,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerReference struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerReference) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerReference) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerReference
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfo: Chunk
@@ -3026,9 +3211,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfo) UnmarshalJSON(data []byte) error {
@@ -3072,9 +3257,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfoDocumentMetadata s
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfoDocumentMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfoDocumentMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerReferenceChunkInfoDocumentMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfo:
@@ -3104,9 +3289,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfo st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfoChunk
@@ -3129,9 +3314,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfoChu
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfoChunkContent) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfoChunkContent) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerReferenceUnstructuredDocumentInfoChunkContent
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerStep: Step information.
@@ -3163,9 +3348,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStep struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerStep) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerStep) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerStep
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerStepAction: Action.
@@ -3187,9 +3372,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStepAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerStepAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerStepAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerStepAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservation: Observation.
@@ -3210,9 +3395,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservation) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 type GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResult struct {
@@ -3224,6 +3409,11 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResult st
 	// SnippetInfo: If citation_type is DOCUMENT_LEVEL_CITATION, populate document
 	// level snippets.
 	SnippetInfo []*GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultSnippetInfo `json:"snippetInfo,omitempty"`
+	// StructData: Data representation. The structured JSON data for the document.
+	// It's populated from the struct data from the Document (code pointer:
+	// http://shortn/_objzAfIiHq), or the Chunk in search result (code pointer:
+	// http://shortn/_Ipo6KFFGBL).
+	StructData googleapi.RawMessage `json:"structData,omitempty"`
 	// Title: Title.
 	Title string `json:"title,omitempty"`
 	// Uri: URI for the document.
@@ -3241,9 +3431,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResult st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResult) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResult) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResult
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultChunk
@@ -3268,9 +3458,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultChu
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultChunkInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultChunkInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultChunkInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultChunkInfo) UnmarshalJSON(data []byte) error {
@@ -3307,9 +3497,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultSni
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultSnippetInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultSnippetInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerStepActionObservationSearchResultSnippetInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaAnswerStepActionSearchAction: Search
@@ -3330,9 +3520,9 @@ type GoogleCloudDiscoveryengineV1alphaAnswerStepActionSearchAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaAnswerStepActionSearchAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaAnswerStepActionSearchAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaAnswerStepActionSearchAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata: Metadata
@@ -3358,9 +3548,9 @@ type GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse: Response
@@ -3381,9 +3571,9 @@ type GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaCondition: Defines circumstances to be
@@ -3408,9 +3598,9 @@ type GoogleCloudDiscoveryengineV1alphaCondition struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaCondition) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaCondition) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaCondition
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaConditionQueryTerm: Matcher for search
@@ -3435,9 +3625,9 @@ type GoogleCloudDiscoveryengineV1alphaConditionQueryTerm struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaConditionQueryTerm) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaConditionQueryTerm) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaConditionQueryTerm
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaConditionTimeRange: Used for time-dependent
@@ -3460,9 +3650,9 @@ type GoogleCloudDiscoveryengineV1alphaConditionTimeRange struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaConditionTimeRange) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaConditionTimeRange) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaConditionTimeRange
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaControl: Defines a conditioned behavior to
@@ -3532,9 +3722,9 @@ type GoogleCloudDiscoveryengineV1alphaControl struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaControl) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaControl) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaControl
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaControlBoostAction: Adjusts order of
@@ -3566,9 +3756,9 @@ type GoogleCloudDiscoveryengineV1alphaControlBoostAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaControlBoostAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaControlBoostAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaControlBoostAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1alphaControlBoostAction) UnmarshalJSON(data []byte) error {
@@ -3611,9 +3801,9 @@ type GoogleCloudDiscoveryengineV1alphaControlFilterAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaControlFilterAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaControlFilterAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaControlFilterAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaControlRedirectAction: Redirects a shopper
@@ -3636,9 +3826,9 @@ type GoogleCloudDiscoveryengineV1alphaControlRedirectAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaControlRedirectAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaControlRedirectAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaControlRedirectAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaControlSynonymsAction: Creates a set of
@@ -3661,9 +3851,9 @@ type GoogleCloudDiscoveryengineV1alphaControlSynonymsAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaControlSynonymsAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaControlSynonymsAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaControlSynonymsAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaCreateDataStoreMetadata: Metadata related
@@ -3688,9 +3878,9 @@ type GoogleCloudDiscoveryengineV1alphaCreateDataStoreMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaCreateDataStoreMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaCreateDataStoreMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaCreateDataStoreMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaCreateEngineMetadata: Metadata related to
@@ -3715,9 +3905,9 @@ type GoogleCloudDiscoveryengineV1alphaCreateEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaCreateEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaCreateEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaCreateEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaCreateSchemaMetadata: Metadata for Create
@@ -3741,9 +3931,9 @@ type GoogleCloudDiscoveryengineV1alphaCreateSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaCreateSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaCreateSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaCreateSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaCreateTargetSiteMetadata: Metadata related
@@ -3768,9 +3958,9 @@ type GoogleCloudDiscoveryengineV1alphaCreateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaCreateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaCustomTuningModel: Metadata that describes
@@ -3780,6 +3970,8 @@ type GoogleCloudDiscoveryengineV1alphaCustomTuningModel struct {
 	CreateTime string `json:"createTime,omitempty"`
 	// DisplayName: The display name of the model.
 	DisplayName string `json:"displayName,omitempty"`
+	// Metrics: The metrics of the trained model.
+	Metrics map[string]float64 `json:"metrics,omitempty"`
 	// ModelState: The state that the model is in (e.g.`TRAINING` or
 	// `TRAINING_FAILED`).
 	//
@@ -3790,6 +3982,8 @@ type GoogleCloudDiscoveryengineV1alphaCustomTuningModel struct {
 	//   "TRAINING_COMPLETE" - The model has successfully completed training.
 	//   "READY_FOR_SERVING" - The model is ready for serving.
 	//   "TRAINING_FAILED" - The model training failed.
+	//   "NO_IMPROVEMENT" - The model training finished successfully but metrics
+	// did not improve.
 	ModelState string `json:"modelState,omitempty"`
 	// ModelVersion: The version of the model.
 	ModelVersion int64 `json:"modelVersion,omitempty,string"`
@@ -3813,9 +4007,9 @@ type GoogleCloudDiscoveryengineV1alphaCustomTuningModel struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaCustomTuningModel) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaCustomTuningModel) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaCustomTuningModel
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDataStore: DataStore captures global
@@ -3862,6 +4056,8 @@ type GoogleCloudDiscoveryengineV1alphaDataStore struct {
 	//   "MEDIA" - The media industry vertical.
 	//   "HEALTHCARE_FHIR" - The healthcare FHIR vertical.
 	IndustryVertical string `json:"industryVertical,omitempty"`
+	// LanguageInfo: Language info for DataStore.
+	LanguageInfo *GoogleCloudDiscoveryengineV1alphaLanguageInfo `json:"languageInfo,omitempty"`
 	// Name: Immutable. The full resource name of the data store. Format:
 	// `projects/{project}/locations/{location}/collections/{collection_id}/dataStor
 	// es/{data_store_id}`. This field must be a UTF-8 encoded string with a length
@@ -3905,9 +4101,9 @@ type GoogleCloudDiscoveryengineV1alphaDataStore struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDataStore) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDataStore) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDataStore
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDeleteDataStoreMetadata: Metadata related
@@ -3932,9 +4128,9 @@ type GoogleCloudDiscoveryengineV1alphaDeleteDataStoreMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDeleteDataStoreMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDeleteDataStoreMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDeleteDataStoreMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDeleteEngineMetadata: Metadata related to
@@ -3959,9 +4155,9 @@ type GoogleCloudDiscoveryengineV1alphaDeleteEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDeleteEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDeleteEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDeleteEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDeleteSchemaMetadata: Metadata for
@@ -3985,9 +4181,9 @@ type GoogleCloudDiscoveryengineV1alphaDeleteSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDeleteSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDeleteSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDeleteSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDeleteTargetSiteMetadata: Metadata related
@@ -4012,9 +4208,9 @@ type GoogleCloudDiscoveryengineV1alphaDeleteTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDeleteTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDeleteTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDeleteTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchMetadata: Metadata
@@ -4040,9 +4236,9 @@ type GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDisableAdvancedSiteSearchResponse: Response
@@ -4070,9 +4266,10 @@ type GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfig struct {
 	// configuration based on the file type. Supported keys: * `pdf`: Override
 	// parsing config for PDF files, either digital parsing, ocr parsing or layout
 	// parsing is supported. * `html`: Override parsing config for HTML files, only
-	// digital parsing and or layout parsing are supported. * `docx`: Override
-	// parsing config for DOCX files, only digital parsing and or layout parsing
-	// are supported.
+	// digital parsing and layout parsing are supported. * `docx`: Override parsing
+	// config for DOCX files, only digital parsing and layout parsing are
+	// supported. * `pptx`: Override parsing config for PPTX files, only digital
+	// parsing and layout parsing are supported.
 	ParsingConfigOverrides map[string]GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfig `json:"parsingConfigOverrides,omitempty"`
 	// ForceSendFields is a list of field names (e.g. "ChunkingConfig") to
 	// unconditionally include in API requests. By default, fields with empty or
@@ -4087,9 +4284,9 @@ type GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfig:
@@ -4110,9 +4307,9 @@ type GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfig str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfigLayout
@@ -4138,9 +4335,9 @@ type GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfigLayo
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfig:
@@ -4166,9 +4363,9 @@ type GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfig stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfigDigital
@@ -4204,9 +4401,9 @@ type GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfigOcrPa
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfigOcrParsingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfigOcrParsingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaDocumentProcessingConfigParsingConfigOcrParsingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata: Metadata
@@ -4232,9 +4429,9 @@ type GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEnableAdvancedSiteSearchResponse: Response
@@ -4326,9 +4523,9 @@ type GoogleCloudDiscoveryengineV1alphaEngine struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngine) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngine) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngine
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfig: Configurations for
@@ -4363,9 +4560,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfigAgentCreationConfig:
@@ -4403,9 +4600,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfigAgentCreationConfig 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfigAgentCreationConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfigAgentCreationConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineChatEngineConfigAgentCreationConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineChatEngineMetadata: Additional
@@ -4427,9 +4624,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineChatEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineChatEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineChatEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineChatEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineCommonConfig: Common configurations
@@ -4451,9 +4648,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineCommonConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineCommonConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineCommonConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineCommonConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfig:
@@ -4504,9 +4701,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfig stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfigOptimiz
@@ -4531,9 +4728,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfigOptim
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfigOptimizationObjectiveConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfigOptimizationObjectiveConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfigOptimizationObjectiveConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1alphaEngineMediaRecommendationEngineConfigOptimizationObjectiveConfig) UnmarshalJSON(data []byte) error {
@@ -4600,9 +4797,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineRecommendationMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineRecommendationMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineRecommendationMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineRecommendationMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineSearchEngineConfig: Configurations
@@ -4638,9 +4835,9 @@ type GoogleCloudDiscoveryengineV1alphaEngineSearchEngineConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEngineSearchEngineConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEngineSearchEngineConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEngineSearchEngineConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEngineSimilarDocumentsEngineConfig:
@@ -4667,9 +4864,9 @@ type GoogleCloudDiscoveryengineV1alphaEstimateDataSizeMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEstimateDataSizeMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEstimateDataSizeMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEstimateDataSizeMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaEstimateDataSizeResponse: Response of the
@@ -4694,9 +4891,63 @@ type GoogleCloudDiscoveryengineV1alphaEstimateDataSizeResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaEstimateDataSizeResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaEstimateDataSizeResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaEstimateDataSizeResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaExportUserEventsMetadata: Metadata related
+// to the progress of the Export operation. This is returned by the
+// google.longrunning.Operation.metadata field.
+type GoogleCloudDiscoveryengineV1alphaExportUserEventsMetadata struct {
+	// CreateTime: Operation create time.
+	CreateTime string `json:"createTime,omitempty"`
+	// UpdateTime: Operation last update time. If the operation is done, this is
+	// also the finish time.
+	UpdateTime string `json:"updateTime,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "CreateTime") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "CreateTime") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaExportUserEventsMetadata) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaExportUserEventsMetadata
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaExportUserEventsResponse: Response of the
+// ExportUserEventsRequest. If the long running operation was successful, then
+// this message is returned by the google.longrunning.Operations.response
+// field.
+type GoogleCloudDiscoveryengineV1alphaExportUserEventsResponse struct {
+	// OutputResult: Output result indicating where the data were exported to.
+	OutputResult *GoogleCloudDiscoveryengineV1alphaOutputResult `json:"outputResult,omitempty"`
+	// Status: The status of the export operation.
+	Status *GoogleRpcStatus `json:"status,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "OutputResult") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "OutputResult") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaExportUserEventsResponse) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaExportUserEventsResponse
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaFieldConfig: Configurations for fields of a
@@ -4860,9 +5111,9 @@ type GoogleCloudDiscoveryengineV1alphaFieldConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaFieldConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaFieldConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaFieldConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaIdpConfig: Identity Provider Config.
@@ -4889,9 +5140,9 @@ type GoogleCloudDiscoveryengineV1alphaIdpConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaIdpConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaIdpConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaIdpConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaIdpConfigExternalIdpConfig: Third party IDP
@@ -4913,9 +5164,68 @@ type GoogleCloudDiscoveryengineV1alphaIdpConfigExternalIdpConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaIdpConfigExternalIdpConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaIdpConfigExternalIdpConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaIdpConfigExternalIdpConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsMetadata:
+// Metadata related to the progress of the ImportCompletionSuggestions
+// operation. This will be returned by the
+// google.longrunning.Operation.metadata field.
+type GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsMetadata struct {
+	// CreateTime: Operation create time.
+	CreateTime string `json:"createTime,omitempty"`
+	// FailureCount: Count of CompletionSuggestions that failed to be imported.
+	FailureCount int64 `json:"failureCount,omitempty,string"`
+	// SuccessCount: Count of CompletionSuggestions successfully imported.
+	SuccessCount int64 `json:"successCount,omitempty,string"`
+	// UpdateTime: Operation last update time. If the operation is done, this is
+	// also the finish time.
+	UpdateTime string `json:"updateTime,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "CreateTime") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "CreateTime") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsMetadata) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsMetadata
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsResponse:
+// Response of the CompletionService.ImportCompletionSuggestions method. If the
+// long running operation is done, this message is returned by the
+// google.longrunning.Operations.response field if the operation is successful.
+type GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsResponse struct {
+	// ErrorConfig: The desired location of errors incurred during the Import.
+	ErrorConfig *GoogleCloudDiscoveryengineV1alphaImportErrorConfig `json:"errorConfig,omitempty"`
+	// ErrorSamples: A sample of errors encountered while processing the request.
+	ErrorSamples []*GoogleRpcStatus `json:"errorSamples,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "ErrorConfig") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "ErrorConfig") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsResponse) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaImportCompletionSuggestionsResponse
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaImportDocumentsMetadata: Metadata related
@@ -4946,9 +5256,9 @@ type GoogleCloudDiscoveryengineV1alphaImportDocumentsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaImportDocumentsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaImportDocumentsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaImportDocumentsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaImportDocumentsResponse: Response of the
@@ -4974,9 +5284,9 @@ type GoogleCloudDiscoveryengineV1alphaImportDocumentsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaImportDocumentsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaImportDocumentsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaImportDocumentsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaImportErrorConfig: Configuration of
@@ -5000,9 +5310,9 @@ type GoogleCloudDiscoveryengineV1alphaImportErrorConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaImportErrorConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaImportErrorConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaImportErrorConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesMetadata:
@@ -5028,9 +5338,9 @@ type GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesMetadata st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesResponse:
@@ -5056,9 +5366,9 @@ type GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesResponse st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaImportSuggestionDenyListEntriesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaImportUserEventsMetadata: Metadata related
@@ -5087,9 +5397,9 @@ type GoogleCloudDiscoveryengineV1alphaImportUserEventsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaImportUserEventsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaImportUserEventsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaImportUserEventsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaImportUserEventsResponse: Response of the
@@ -5121,9 +5431,41 @@ type GoogleCloudDiscoveryengineV1alphaImportUserEventsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaImportUserEventsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaImportUserEventsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaImportUserEventsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaLanguageInfo: Language info for DataStore.
+type GoogleCloudDiscoveryengineV1alphaLanguageInfo struct {
+	// Language: Output only. Language part of normalized_language_code. E.g.:
+	// `en-US` -> `en`, `zh-Hans-HK` -> `zh`, `en` -> `en`.
+	Language string `json:"language,omitempty"`
+	// LanguageCode: The language code for the DataStore.
+	LanguageCode string `json:"languageCode,omitempty"`
+	// NormalizedLanguageCode: Output only. This is the normalized form of
+	// language_code. E.g.: language_code of `en-GB`, `en_GB`, `en-UK` or `en-gb`
+	// will have normalized_language_code of `en-GB`.
+	NormalizedLanguageCode string `json:"normalizedLanguageCode,omitempty"`
+	// Region: Output only. Region part of normalized_language_code, if present.
+	// E.g.: `en-US` -> `US`, `zh-Hans-HK` -> `HK`, `en` -> ``.
+	Region string `json:"region,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Language") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Language") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaLanguageInfo) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaLanguageInfo
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaListCustomModelsResponse: Response message
@@ -5144,9 +5486,57 @@ type GoogleCloudDiscoveryengineV1alphaListCustomModelsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaListCustomModelsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaListCustomModelsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaListCustomModelsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaOutputResult: Output result that stores the
+// information about where the exported data is stored.
+type GoogleCloudDiscoveryengineV1alphaOutputResult struct {
+	// BigqueryResult: The BigQuery location where the result is stored.
+	BigqueryResult *GoogleCloudDiscoveryengineV1alphaOutputResultBigQueryOutputResult `json:"bigqueryResult,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "BigqueryResult") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "BigqueryResult") to include in
+	// API requests with the JSON null value. By default, fields with empty values
+	// are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaOutputResult) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaOutputResult
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaOutputResultBigQueryOutputResult: A
+// BigQuery output result.
+type GoogleCloudDiscoveryengineV1alphaOutputResultBigQueryOutputResult struct {
+	// DatasetId: The ID of a BigQuery Dataset.
+	DatasetId string `json:"datasetId,omitempty"`
+	// TableId: The ID of a BigQuery Table.
+	TableId string `json:"tableId,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "DatasetId") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "DatasetId") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaOutputResultBigQueryOutputResult) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaOutputResultBigQueryOutputResult
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaProject: Metadata and configurations for a
@@ -5179,9 +5569,9 @@ type GoogleCloudDiscoveryengineV1alphaProject struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaProject) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaProject) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaProject
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaProjectServiceTerms: Metadata about the
@@ -5225,14 +5615,67 @@ type GoogleCloudDiscoveryengineV1alphaProjectServiceTerms struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaProjectServiceTerms) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaProjectServiceTerms) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaProjectServiceTerms
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaProvisionProjectMetadata: Metadata
 // associated with a project provision operation.
 type GoogleCloudDiscoveryengineV1alphaProvisionProjectMetadata struct {
+}
+
+// GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsMetadata:
+// Metadata related to the progress of the PurgeCompletionSuggestions
+// operation. This is returned by the google.longrunning.Operation.metadata
+// field.
+type GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsMetadata struct {
+	// CreateTime: Operation create time.
+	CreateTime string `json:"createTime,omitempty"`
+	// UpdateTime: Operation last update time. If the operation is done, this is
+	// also the finish time.
+	UpdateTime string `json:"updateTime,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "CreateTime") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "CreateTime") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsMetadata) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsMetadata
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsResponse:
+// Response message for CompletionService.PurgeCompletionSuggestions method.
+type GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsResponse struct {
+	// ErrorSamples: A sample of errors encountered while processing the request.
+	ErrorSamples []*GoogleRpcStatus `json:"errorSamples,omitempty"`
+	// PurgeSucceeded: Whether the completion suggestions were successfully purged.
+	PurgeSucceeded bool `json:"purgeSucceeded,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "ErrorSamples") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "ErrorSamples") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsResponse) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeCompletionSuggestionsResponse
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaPurgeDocumentsMetadata: Metadata related to
@@ -5263,9 +5706,9 @@ type GoogleCloudDiscoveryengineV1alphaPurgeDocumentsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaPurgeDocumentsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaPurgeDocumentsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeDocumentsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaPurgeDocumentsResponse: Response message
@@ -5293,9 +5736,9 @@ type GoogleCloudDiscoveryengineV1alphaPurgeDocumentsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaPurgeDocumentsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaPurgeDocumentsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeDocumentsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesMetadata:
@@ -5321,9 +5764,9 @@ type GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesMetadata str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesResponse:
@@ -5347,9 +5790,9 @@ type GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesResponse str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeSuggestionDenyListEntriesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaPurgeUserEventsMetadata: Metadata related
@@ -5378,9 +5821,9 @@ type GoogleCloudDiscoveryengineV1alphaPurgeUserEventsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaPurgeUserEventsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaPurgeUserEventsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeUserEventsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaPurgeUserEventsResponse: Response of the
@@ -5403,9 +5846,9 @@ type GoogleCloudDiscoveryengineV1alphaPurgeUserEventsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaPurgeUserEventsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaPurgeUserEventsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaPurgeUserEventsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaQuery: Defines a user inputed query.
@@ -5427,9 +5870,9 @@ type GoogleCloudDiscoveryengineV1alphaQuery struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaQuery) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaQuery) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaQuery
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaRecrawlUrisMetadata: Metadata related to
@@ -5468,9 +5911,9 @@ type GoogleCloudDiscoveryengineV1alphaRecrawlUrisMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaRecrawlUrisMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaRecrawlUrisMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaRecrawlUrisMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponse: Response message for
@@ -5493,9 +5936,9 @@ type GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfo: Details
@@ -5520,9 +5963,9 @@ type GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfoFailureReason:
@@ -5553,9 +5996,9 @@ type GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfoFailureReaso
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfoFailureReason) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfoFailureReason) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfoFailureReason
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaSchema: Defines the structure and layout of
@@ -5585,9 +6028,9 @@ type GoogleCloudDiscoveryengineV1alphaSchema struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaSchema) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaSchema) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaSchema
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaSession: External session proto definition.
@@ -5623,9 +6066,9 @@ type GoogleCloudDiscoveryengineV1alphaSession struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaSession) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaSession) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaSession
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaSessionTurn: Represents a turn, including a
@@ -5649,9 +6092,9 @@ type GoogleCloudDiscoveryengineV1alphaSessionTurn struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaSessionTurn) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaSessionTurn) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaSessionTurn
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo: Verification
@@ -5682,9 +6125,9 @@ type GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaTargetSite: A target site for the
@@ -5752,9 +6195,9 @@ type GoogleCloudDiscoveryengineV1alphaTargetSite struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaTargetSite) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaTargetSite) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaTargetSite
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReason: Site search
@@ -5775,9 +6218,9 @@ type GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReason struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReason) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReason) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReason
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure: Failed
@@ -5799,9 +6242,9 @@ type GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure struct
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaTrainCustomModelMetadata: Metadata related
@@ -5826,9 +6269,9 @@ type GoogleCloudDiscoveryengineV1alphaTrainCustomModelMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaTrainCustomModelMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaTrainCustomModelMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaTrainCustomModelMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaTrainCustomModelResponse: Response of the
@@ -5865,9 +6308,9 @@ type GoogleCloudDiscoveryengineV1alphaTrainCustomModelResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaTrainCustomModelResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaTrainCustomModelResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaTrainCustomModelResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaTuneEngineMetadata: Metadata associated
@@ -5891,9 +6334,9 @@ type GoogleCloudDiscoveryengineV1alphaTuneEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaTuneEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaTuneEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaTuneEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaTuneEngineResponse: Response associated
@@ -5922,9 +6365,9 @@ type GoogleCloudDiscoveryengineV1alphaUpdateSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaUpdateSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaUpdateSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaUpdateSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1alphaUpdateTargetSiteMetadata: Metadata related
@@ -5949,9 +6392,9 @@ type GoogleCloudDiscoveryengineV1alphaUpdateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1alphaUpdateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1alphaUpdateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1alphaUpdateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAlloyDbSource: AlloyDB source import data
@@ -5992,9 +6435,9 @@ type GoogleCloudDiscoveryengineV1betaAlloyDbSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAlloyDbSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAlloyDbSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAlloyDbSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswer: Defines an answer.
@@ -6013,6 +6456,8 @@ type GoogleCloudDiscoveryengineV1betaAnswer struct {
 	//   "POTENTIAL_POLICY_VIOLATION" - The potential policy violation case. Google
 	// skips the answer if there is a potential policy violation detected. This
 	// includes content that may be violent or toxic.
+	//   "NO_RELEVANT_CONTENT" - The no relevant content case. Google skips the
+	// answer if there is no relevant content in the retrieved search results.
 	AnswerSkippedReasons []string `json:"answerSkippedReasons,omitempty"`
 	// AnswerText: The textual answer.
 	AnswerText string `json:"answerText,omitempty"`
@@ -6058,9 +6503,9 @@ type GoogleCloudDiscoveryengineV1betaAnswer struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswer) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswer) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswer
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerCitation: Citation info for a segment.
@@ -6085,9 +6530,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerCitation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerCitation) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerCitation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerCitation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerCitationSource: Citation source.
@@ -6107,9 +6552,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerCitationSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerCitationSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerCitationSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerCitationSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequest: Request message for
@@ -6172,9 +6617,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpec:
@@ -6225,9 +6670,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpec stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecModelSp
@@ -6249,9 +6694,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecModel
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecModelSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecModelSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecModelSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecPromptS
@@ -6272,9 +6717,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecPromp
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecPromptSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecPromptSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestAnswerGenerationSpecPromptSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpec:
@@ -6297,9 +6742,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpec st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQuery
@@ -6325,9 +6770,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQue
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQueryClassificationSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQueryClassificationSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQueryClassificationSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQuery
@@ -6351,9 +6796,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQue
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQueryRephraserSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQueryRephraserSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestQueryUnderstandingSpecQueryRephraserSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestRelatedQuestionsSpec:
@@ -6374,9 +6819,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestRelatedQuestionsSpec stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestRelatedQuestionsSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestRelatedQuestionsSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestRelatedQuestionsSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSafetySpec: Safety
@@ -6398,9 +6843,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSafetySpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSafetySpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSafetySpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSafetySpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpec: Search
@@ -6423,9 +6868,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchParams:
@@ -6489,9 +6934,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchParams st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchParams) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchParams) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchParams
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultList:
@@ -6513,9 +6958,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultLis
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultList) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultList) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultList
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListS
@@ -6538,9 +6983,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultLis
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResult) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResult) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResult
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListS
@@ -6563,9 +7008,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultLis
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultChunkInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultChunkInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultChunkInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListS
@@ -6596,9 +7041,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultLis
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListS
@@ -6621,9 +7066,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultLis
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoDocumentContext) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoDocumentContext) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoDocumentContext
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListS
@@ -6648,9 +7093,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultLis
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoExtractiveAnswer) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoExtractiveAnswer) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoExtractiveAnswer
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListS
@@ -6675,9 +7120,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultLis
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoExtractiveSegment) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoExtractiveSegment) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryRequestSearchSpecSearchResultListSearchResultUnstructuredDocumentInfoExtractiveSegment
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryResponse: Response message for
@@ -6709,9 +7154,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfo: Query
@@ -6732,9 +7177,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfoQueryClassificati
@@ -6762,9 +7207,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfoQueryClassifica
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfoQueryClassificationInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfoQueryClassificationInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerQueryUnderstandingInfoQueryClassificationInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerReference: Reference.
@@ -6786,9 +7231,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerReference struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerReference) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerReference) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerReference
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfo: Chunk information.
@@ -6814,9 +7259,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfo) UnmarshalJSON(data []byte) error {
@@ -6860,9 +7305,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfoDocumentMetadata st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfoDocumentMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfoDocumentMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerReferenceChunkInfoDocumentMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfo:
@@ -6892,9 +7337,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfo str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfoChunkC
@@ -6917,9 +7362,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfoChun
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfoChunkContent) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfoChunkContent) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerReferenceUnstructuredDocumentInfoChunkContent
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerStep: Step information.
@@ -6951,9 +7396,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerStep struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerStep) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerStep) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerStep
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerStepAction: Action.
@@ -6975,9 +7420,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerStepAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerStepAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerStepAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerStepAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerStepActionObservation: Observation.
@@ -6998,9 +7443,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerStepActionObservation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerStepActionObservation) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerStepActionObservation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerStepActionObservation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 type GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResult struct {
@@ -7012,6 +7457,11 @@ type GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResult str
 	// SnippetInfo: If citation_type is DOCUMENT_LEVEL_CITATION, populate document
 	// level snippets.
 	SnippetInfo []*GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultSnippetInfo `json:"snippetInfo,omitempty"`
+	// StructData: Data representation. The structured JSON data for the document.
+	// It's populated from the struct data from the Document (code pointer:
+	// http://shortn/_objzAfIiHq), or the Chunk in search result (code pointer:
+	// http://shortn/_Ipo6KFFGBL).
+	StructData googleapi.RawMessage `json:"structData,omitempty"`
 	// Title: Title.
 	Title string `json:"title,omitempty"`
 	// Uri: URI for the document.
@@ -7029,9 +7479,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResult str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResult) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResult) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResult
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultChunkI
@@ -7056,9 +7506,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultChun
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultChunkInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultChunkInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultChunkInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultChunkInfo) UnmarshalJSON(data []byte) error {
@@ -7095,9 +7545,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultSnip
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultSnippetInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultSnippetInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerStepActionObservationSearchResultSnippetInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaAnswerStepActionSearchAction: Search action.
@@ -7117,9 +7567,9 @@ type GoogleCloudDiscoveryengineV1betaAnswerStepActionSearchAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaAnswerStepActionSearchAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaAnswerStepActionSearchAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaAnswerStepActionSearchAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBatchCreateTargetSiteMetadata: Metadata
@@ -7145,9 +7595,9 @@ type GoogleCloudDiscoveryengineV1betaBatchCreateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBatchCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBatchCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBatchCreateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesRequest: Request
@@ -7169,9 +7619,9 @@ type GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesResponse: Response
@@ -7192,9 +7642,9 @@ type GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBatchCreateTargetSitesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBatchVerifyTargetSitesRequest: Request
@@ -7244,9 +7694,9 @@ type GoogleCloudDiscoveryengineV1betaBigQuerySource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBigQuerySource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBigQuerySource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBigQuerySource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBigtableOptions: The Bigtable Options object
@@ -7272,9 +7722,9 @@ type GoogleCloudDiscoveryengineV1betaBigtableOptions struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBigtableOptions) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBigtableOptions) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBigtableOptions
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumn: The column of
@@ -7327,9 +7777,9 @@ type GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumn struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumn) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumn) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumn
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumnFamily: The
@@ -7382,9 +7832,9 @@ type GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumnFamily struct 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumnFamily) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumnFamily) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBigtableOptionsBigtableColumnFamily
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaBigtableSource: The Cloud Bigtable source
@@ -7417,9 +7867,9 @@ type GoogleCloudDiscoveryengineV1betaBigtableSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaBigtableSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaBigtableSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaBigtableSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCheckGroundingRequest: Request message for
@@ -7458,9 +7908,9 @@ type GoogleCloudDiscoveryengineV1betaCheckGroundingRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCheckGroundingRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCheckGroundingRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCheckGroundingRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCheckGroundingResponse: Response message for
@@ -7492,9 +7942,9 @@ type GoogleCloudDiscoveryengineV1betaCheckGroundingResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCheckGroundingResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCheckGroundingResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCheckGroundingResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaCheckGroundingResponse) UnmarshalJSON(data []byte) error {
@@ -7548,9 +7998,9 @@ type GoogleCloudDiscoveryengineV1betaCheckGroundingResponseClaim struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCheckGroundingResponseClaim) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCheckGroundingResponseClaim) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCheckGroundingResponseClaim
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCheckGroundingSpec: Specification for the
@@ -7575,9 +8025,9 @@ type GoogleCloudDiscoveryengineV1betaCheckGroundingSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCheckGroundingSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCheckGroundingSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCheckGroundingSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaCheckGroundingSpec) UnmarshalJSON(data []byte) error {
@@ -7633,9 +8083,9 @@ type GoogleCloudDiscoveryengineV1betaChunk struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaChunk) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaChunk) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaChunk
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaChunk) UnmarshalJSON(data []byte) error {
@@ -7676,9 +8126,9 @@ type GoogleCloudDiscoveryengineV1betaChunkChunkMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaChunkChunkMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaChunkChunkMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaChunkChunkMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaChunkDocumentMetadata: Document metadata
@@ -7705,9 +8155,9 @@ type GoogleCloudDiscoveryengineV1betaChunkDocumentMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaChunkDocumentMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaChunkDocumentMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaChunkDocumentMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaChunkPageSpan: Page span of the chunk.
@@ -7729,9 +8179,9 @@ type GoogleCloudDiscoveryengineV1betaChunkPageSpan struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaChunkPageSpan) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaChunkPageSpan) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaChunkPageSpan
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCloudSqlSource: Cloud SQL source import data
@@ -7773,9 +8223,9 @@ type GoogleCloudDiscoveryengineV1betaCloudSqlSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCloudSqlSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCloudSqlSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCloudSqlSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCompleteQueryResponse: Response message for
@@ -7805,9 +8255,9 @@ type GoogleCloudDiscoveryengineV1betaCompleteQueryResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCompleteQueryResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCompleteQueryResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCompleteQueryResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCompleteQueryResponseQuerySuggestion:
@@ -7832,9 +8282,9 @@ type GoogleCloudDiscoveryengineV1betaCompleteQueryResponseQuerySuggestion struct
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCompleteQueryResponseQuerySuggestion) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCompleteQueryResponseQuerySuggestion) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCompleteQueryResponseQuerySuggestion
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCompletionInfo: Detailed completion
@@ -7860,9 +8310,64 @@ type GoogleCloudDiscoveryengineV1betaCompletionInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCompletionInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCompletionInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCompletionInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaCompletionSuggestion: Autocomplete
+// suggestions that are imported from Customer.
+type GoogleCloudDiscoveryengineV1betaCompletionSuggestion struct {
+	// AlternativePhrases: Alternative matching phrases for this suggestion.
+	AlternativePhrases []string `json:"alternativePhrases,omitempty"`
+	// Frequency: Frequency of this suggestion. Will be used to rank suggestions
+	// when score is not available.
+	Frequency int64 `json:"frequency,omitempty,string"`
+	// GlobalScore: Global score of this suggestion. Control how this suggestion
+	// would be scored / ranked.
+	GlobalScore float64 `json:"globalScore,omitempty"`
+	// GroupId: If two suggestions have the same groupId, they will not be returned
+	// together. Instead the one ranked higher will be returned. This can be used
+	// to deduplicate semantically identical suggestions.
+	GroupId string `json:"groupId,omitempty"`
+	// GroupScore: The score of this suggestion within its group.
+	GroupScore float64 `json:"groupScore,omitempty"`
+	// LanguageCode: BCP-47 language code of this suggestion.
+	LanguageCode string `json:"languageCode,omitempty"`
+	// Suggestion: Required. The suggestion text.
+	Suggestion string `json:"suggestion,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "AlternativePhrases") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "AlternativePhrases") to include
+	// in API requests with the JSON null value. By default, fields with empty
+	// values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaCompletionSuggestion) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaCompletionSuggestion
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+func (s *GoogleCloudDiscoveryengineV1betaCompletionSuggestion) UnmarshalJSON(data []byte) error {
+	type NoMethod GoogleCloudDiscoveryengineV1betaCompletionSuggestion
+	var s1 struct {
+		GlobalScore gensupport.JSONFloat64 `json:"globalScore"`
+		GroupScore  gensupport.JSONFloat64 `json:"groupScore"`
+		*NoMethod
+	}
+	s1.NoMethod = (*NoMethod)(s)
+	if err := json.Unmarshal(data, &s1); err != nil {
+		return err
+	}
+	s.GlobalScore = float64(s1.GlobalScore)
+	s.GroupScore = float64(s1.GroupScore)
+	return nil
 }
 
 // GoogleCloudDiscoveryengineV1betaCondition: Defines circumstances to be
@@ -7887,9 +8392,9 @@ type GoogleCloudDiscoveryengineV1betaCondition struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCondition) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCondition) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCondition
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaConditionQueryTerm: Matcher for search
@@ -7914,9 +8419,9 @@ type GoogleCloudDiscoveryengineV1betaConditionQueryTerm struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaConditionQueryTerm) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaConditionQueryTerm) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaConditionQueryTerm
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaConditionTimeRange: Used for time-dependent
@@ -7939,9 +8444,9 @@ type GoogleCloudDiscoveryengineV1betaConditionTimeRange struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaConditionTimeRange) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaConditionTimeRange) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaConditionTimeRange
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaControl: Defines a conditioned behavior to
@@ -8014,9 +8519,9 @@ type GoogleCloudDiscoveryengineV1betaControl struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaControl) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaControl) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaControl
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaControlBoostAction: Adjusts order of
@@ -8048,9 +8553,9 @@ type GoogleCloudDiscoveryengineV1betaControlBoostAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaControlBoostAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaControlBoostAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaControlBoostAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaControlBoostAction) UnmarshalJSON(data []byte) error {
@@ -8093,9 +8598,9 @@ type GoogleCloudDiscoveryengineV1betaControlFilterAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaControlFilterAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaControlFilterAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaControlFilterAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaControlRedirectAction: Redirects a shopper
@@ -8118,9 +8623,9 @@ type GoogleCloudDiscoveryengineV1betaControlRedirectAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaControlRedirectAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaControlRedirectAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaControlRedirectAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaControlSynonymsAction: Creates a set of
@@ -8143,9 +8648,9 @@ type GoogleCloudDiscoveryengineV1betaControlSynonymsAction struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaControlSynonymsAction) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaControlSynonymsAction) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaControlSynonymsAction
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaConversation: External conversation proto
@@ -8188,9 +8693,9 @@ type GoogleCloudDiscoveryengineV1betaConversation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaConversation) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaConversation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaConversation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaConversationContext: Defines context of the
@@ -8215,9 +8720,9 @@ type GoogleCloudDiscoveryengineV1betaConversationContext struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaConversationContext) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaConversationContext) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaConversationContext
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaConversationMessage: Defines a conversation
@@ -8242,9 +8747,9 @@ type GoogleCloudDiscoveryengineV1betaConversationMessage struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaConversationMessage) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaConversationMessage) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaConversationMessage
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaConverseConversationRequest: Request message
@@ -8309,9 +8814,9 @@ type GoogleCloudDiscoveryengineV1betaConverseConversationRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaConverseConversationRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaConverseConversationRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaConverseConversationRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaConverseConversationResponse: Response
@@ -8341,9 +8846,9 @@ type GoogleCloudDiscoveryengineV1betaConverseConversationResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaConverseConversationResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaConverseConversationResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaConverseConversationResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCreateDataStoreMetadata: Metadata related to
@@ -8368,9 +8873,9 @@ type GoogleCloudDiscoveryengineV1betaCreateDataStoreMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCreateDataStoreMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCreateDataStoreMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCreateDataStoreMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCreateEngineMetadata: Metadata related to
@@ -8395,9 +8900,9 @@ type GoogleCloudDiscoveryengineV1betaCreateEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCreateEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCreateEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCreateEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCreateSchemaMetadata: Metadata for Create
@@ -8421,9 +8926,9 @@ type GoogleCloudDiscoveryengineV1betaCreateSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCreateSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCreateSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCreateSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCreateTargetSiteMetadata: Metadata related
@@ -8448,9 +8953,9 @@ type GoogleCloudDiscoveryengineV1betaCreateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCreateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCreateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCreateTargetSiteRequest: Request message for
@@ -8475,9 +8980,9 @@ type GoogleCloudDiscoveryengineV1betaCreateTargetSiteRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCreateTargetSiteRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCreateTargetSiteRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCreateTargetSiteRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaCustomAttribute: A custom attribute that is
@@ -8507,9 +9012,9 @@ type GoogleCloudDiscoveryengineV1betaCustomAttribute struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCustomAttribute) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCustomAttribute) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCustomAttribute
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaCustomAttribute) UnmarshalJSON(data []byte) error {
@@ -8536,6 +9041,8 @@ type GoogleCloudDiscoveryengineV1betaCustomTuningModel struct {
 	CreateTime string `json:"createTime,omitempty"`
 	// DisplayName: The display name of the model.
 	DisplayName string `json:"displayName,omitempty"`
+	// Metrics: The metrics of the trained model.
+	Metrics map[string]float64 `json:"metrics,omitempty"`
 	// ModelState: The state that the model is in (e.g.`TRAINING` or
 	// `TRAINING_FAILED`).
 	//
@@ -8546,6 +9053,8 @@ type GoogleCloudDiscoveryengineV1betaCustomTuningModel struct {
 	//   "TRAINING_COMPLETE" - The model has successfully completed training.
 	//   "READY_FOR_SERVING" - The model is ready for serving.
 	//   "TRAINING_FAILED" - The model training failed.
+	//   "NO_IMPROVEMENT" - The model training finished successfully but metrics
+	// did not improve.
 	ModelState string `json:"modelState,omitempty"`
 	// ModelVersion: The version of the model.
 	ModelVersion int64 `json:"modelVersion,omitempty,string"`
@@ -8569,9 +9078,9 @@ type GoogleCloudDiscoveryengineV1betaCustomTuningModel struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaCustomTuningModel) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaCustomTuningModel) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaCustomTuningModel
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDataStore: DataStore captures global
@@ -8608,6 +9117,8 @@ type GoogleCloudDiscoveryengineV1betaDataStore struct {
 	//   "MEDIA" - The media industry vertical.
 	//   "HEALTHCARE_FHIR" - The healthcare FHIR vertical.
 	IndustryVertical string `json:"industryVertical,omitempty"`
+	// LanguageInfo: Language info for DataStore.
+	LanguageInfo *GoogleCloudDiscoveryengineV1betaLanguageInfo `json:"languageInfo,omitempty"`
 	// Name: Immutable. The full resource name of the data store. Format:
 	// `projects/{project}/locations/{location}/collections/{collection_id}/dataStor
 	// es/{data_store_id}`. This field must be a UTF-8 encoded string with a length
@@ -8654,9 +9165,9 @@ type GoogleCloudDiscoveryengineV1betaDataStore struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDataStore) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDataStore) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDataStore
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDeleteDataStoreMetadata: Metadata related to
@@ -8681,9 +9192,9 @@ type GoogleCloudDiscoveryengineV1betaDeleteDataStoreMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDeleteDataStoreMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDeleteDataStoreMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDeleteDataStoreMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDeleteEngineMetadata: Metadata related to
@@ -8708,9 +9219,9 @@ type GoogleCloudDiscoveryengineV1betaDeleteEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDeleteEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDeleteEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDeleteEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDeleteSchemaMetadata: Metadata for
@@ -8734,9 +9245,9 @@ type GoogleCloudDiscoveryengineV1betaDeleteSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDeleteSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDeleteSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDeleteSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDeleteTargetSiteMetadata: Metadata related
@@ -8761,9 +9272,9 @@ type GoogleCloudDiscoveryengineV1betaDeleteTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDeleteTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDeleteTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDeleteTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDisableAdvancedSiteSearchMetadata: Metadata
@@ -8789,9 +9300,9 @@ type GoogleCloudDiscoveryengineV1betaDisableAdvancedSiteSearchMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDisableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDisableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDisableAdvancedSiteSearchMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDisableAdvancedSiteSearchRequest: Request
@@ -8856,9 +9367,9 @@ type GoogleCloudDiscoveryengineV1betaDocument struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocument) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocument) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocument
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDocumentContent: Unstructured data linked to
@@ -8881,7 +9392,7 @@ type GoogleCloudDiscoveryengineV1betaDocumentContent struct {
 	RawBytes string `json:"rawBytes,omitempty"`
 	// Uri: The URI of the content. Only Cloud Storage URIs (e.g.
 	// `gs://bucket-name/path/to/file`) are supported. The maximum file size is 2.5
-	// MB for text-based formats, 100 MB for other formats.
+	// MB for text-based formats, 200 MB for other formats.
 	Uri string `json:"uri,omitempty"`
 	// ForceSendFields is a list of field names (e.g. "MimeType") to
 	// unconditionally include in API requests. By default, fields with empty or
@@ -8896,9 +9407,9 @@ type GoogleCloudDiscoveryengineV1betaDocumentContent struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocumentContent) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocumentContent) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocumentContent
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDocumentInfo: Detailed document information
@@ -8933,9 +9444,9 @@ type GoogleCloudDiscoveryengineV1betaDocumentInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocumentInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocumentInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocumentInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDocumentProcessingConfig: A singleton
@@ -8958,9 +9469,10 @@ type GoogleCloudDiscoveryengineV1betaDocumentProcessingConfig struct {
 	// configuration based on the file type. Supported keys: * `pdf`: Override
 	// parsing config for PDF files, either digital parsing, ocr parsing or layout
 	// parsing is supported. * `html`: Override parsing config for HTML files, only
-	// digital parsing and or layout parsing are supported. * `docx`: Override
-	// parsing config for DOCX files, only digital parsing and or layout parsing
-	// are supported.
+	// digital parsing and layout parsing are supported. * `docx`: Override parsing
+	// config for DOCX files, only digital parsing and layout parsing are
+	// supported. * `pptx`: Override parsing config for PPTX files, only digital
+	// parsing and layout parsing are supported.
 	ParsingConfigOverrides map[string]GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfig `json:"parsingConfigOverrides,omitempty"`
 	// ForceSendFields is a list of field names (e.g. "ChunkingConfig") to
 	// unconditionally include in API requests. By default, fields with empty or
@@ -8975,9 +9487,9 @@ type GoogleCloudDiscoveryengineV1betaDocumentProcessingConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocumentProcessingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocumentProcessingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocumentProcessingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfig:
@@ -8998,9 +9510,9 @@ type GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfig stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfigLayoutB
@@ -9026,9 +9538,9 @@ type GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfigLayou
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigChunkingConfigLayoutBasedChunkingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfig:
@@ -9054,9 +9566,9 @@ type GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfig struc
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfigDigitalP
@@ -9092,9 +9604,9 @@ type GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfigOcrPar
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfigOcrParsingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfigOcrParsingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDocumentProcessingConfigParsingConfigOcrParsingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaDoubleList: Double list.
@@ -9114,9 +9626,9 @@ type GoogleCloudDiscoveryengineV1betaDoubleList struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaDoubleList) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaDoubleList) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaDoubleList
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaDoubleList) UnmarshalJSON(data []byte) error {
@@ -9154,9 +9666,9 @@ type GoogleCloudDiscoveryengineV1betaEmbeddingConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEmbeddingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEmbeddingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEmbeddingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaEnableAdvancedSiteSearchMetadata: Metadata
@@ -9182,9 +9694,9 @@ type GoogleCloudDiscoveryengineV1betaEnableAdvancedSiteSearchMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEnableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEnableAdvancedSiteSearchMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEnableAdvancedSiteSearchMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaEnableAdvancedSiteSearchRequest: Request
@@ -9273,9 +9785,9 @@ type GoogleCloudDiscoveryengineV1betaEngine struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEngine) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEngine) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEngine
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaEngineChatEngineConfig: Configurations for a
@@ -9310,9 +9822,9 @@ type GoogleCloudDiscoveryengineV1betaEngineChatEngineConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEngineChatEngineConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEngineChatEngineConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEngineChatEngineConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaEngineChatEngineConfigAgentCreationConfig:
@@ -9350,9 +9862,9 @@ type GoogleCloudDiscoveryengineV1betaEngineChatEngineConfigAgentCreationConfig s
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEngineChatEngineConfigAgentCreationConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEngineChatEngineConfigAgentCreationConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEngineChatEngineConfigAgentCreationConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaEngineChatEngineMetadata: Additional
@@ -9374,9 +9886,9 @@ type GoogleCloudDiscoveryengineV1betaEngineChatEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEngineChatEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEngineChatEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEngineChatEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaEngineCommonConfig: Common configurations
@@ -9398,9 +9910,9 @@ type GoogleCloudDiscoveryengineV1betaEngineCommonConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEngineCommonConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEngineCommonConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEngineCommonConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaEngineSearchEngineConfig: Configurations for
@@ -9436,9 +9948,9 @@ type GoogleCloudDiscoveryengineV1betaEngineSearchEngineConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaEngineSearchEngineConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaEngineSearchEngineConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaEngineSearchEngineConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaFactChunk: Fact Chunk.
@@ -9467,9 +9979,9 @@ type GoogleCloudDiscoveryengineV1betaFactChunk struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaFactChunk) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaFactChunk) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaFactChunk
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaFetchDomainVerificationStatusResponse:
@@ -9500,9 +10012,9 @@ type GoogleCloudDiscoveryengineV1betaFetchDomainVerificationStatusResponse struc
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaFetchDomainVerificationStatusResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaFetchDomainVerificationStatusResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaFetchDomainVerificationStatusResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaFhirStoreSource: Cloud FhirStore source
@@ -9530,9 +10042,9 @@ type GoogleCloudDiscoveryengineV1betaFhirStoreSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaFhirStoreSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaFhirStoreSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaFhirStoreSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaFirestoreSource: Firestore source import
@@ -9567,9 +10079,9 @@ type GoogleCloudDiscoveryengineV1betaFirestoreSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaFirestoreSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaFirestoreSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaFirestoreSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaGcsSource: Cloud Storage location for input
@@ -9608,9 +10120,9 @@ type GoogleCloudDiscoveryengineV1betaGcsSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaGcsSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaGcsSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaGcsSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaGroundingFact: Grounding Fact.
@@ -9634,9 +10146,121 @@ type GoogleCloudDiscoveryengineV1betaGroundingFact struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaGroundingFact) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaGroundingFact) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaGroundingFact
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsMetadata:
+// Metadata related to the progress of the ImportCompletionSuggestions
+// operation. This will be returned by the
+// google.longrunning.Operation.metadata field.
+type GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsMetadata struct {
+	// CreateTime: Operation create time.
+	CreateTime string `json:"createTime,omitempty"`
+	// FailureCount: Count of CompletionSuggestions that failed to be imported.
+	FailureCount int64 `json:"failureCount,omitempty,string"`
+	// SuccessCount: Count of CompletionSuggestions successfully imported.
+	SuccessCount int64 `json:"successCount,omitempty,string"`
+	// UpdateTime: Operation last update time. If the operation is done, this is
+	// also the finish time.
+	UpdateTime string `json:"updateTime,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "CreateTime") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "CreateTime") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsMetadata) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsMetadata
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest: Request
+// message for CompletionService.ImportCompletionSuggestions method.
+type GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest struct {
+	// BigquerySource: BigQuery input source.
+	BigquerySource *GoogleCloudDiscoveryengineV1betaBigQuerySource `json:"bigquerySource,omitempty"`
+	// ErrorConfig: The desired location of errors incurred during the Import.
+	ErrorConfig *GoogleCloudDiscoveryengineV1betaImportErrorConfig `json:"errorConfig,omitempty"`
+	// GcsSource: Cloud Storage location for the input content.
+	GcsSource *GoogleCloudDiscoveryengineV1betaGcsSource `json:"gcsSource,omitempty"`
+	// InlineSource: The Inline source for suggestion entries.
+	InlineSource *GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequestInlineSource `json:"inlineSource,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "BigquerySource") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "BigquerySource") to include in
+	// API requests with the JSON null value. By default, fields with empty values
+	// are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequestInlineSourc
+// e: The inline source for CompletionSuggestions.
+type GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequestInlineSource struct {
+	// Suggestions: Required. A list of all denylist entries to import. Max of 1000
+	// items.
+	Suggestions []*GoogleCloudDiscoveryengineV1betaCompletionSuggestion `json:"suggestions,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Suggestions") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Suggestions") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequestInlineSource) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequestInlineSource
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsResponse:
+// Response of the CompletionService.ImportCompletionSuggestions method. If the
+// long running operation is done, this message is returned by the
+// google.longrunning.Operations.response field if the operation is successful.
+type GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsResponse struct {
+	// ErrorConfig: The desired location of errors incurred during the Import.
+	ErrorConfig *GoogleCloudDiscoveryengineV1betaImportErrorConfig `json:"errorConfig,omitempty"`
+	// ErrorSamples: A sample of errors encountered while processing the request.
+	ErrorSamples []*GoogleRpcStatus `json:"errorSamples,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "ErrorConfig") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "ErrorConfig") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsResponse) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsResponse
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportDocumentsMetadata: Metadata related to
@@ -9667,9 +10291,9 @@ type GoogleCloudDiscoveryengineV1betaImportDocumentsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportDocumentsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportDocumentsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportDocumentsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportDocumentsRequest: Request message for
@@ -9751,9 +10375,9 @@ type GoogleCloudDiscoveryengineV1betaImportDocumentsRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportDocumentsRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportDocumentsRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportDocumentsRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportDocumentsRequestInlineSource: The
@@ -9775,9 +10399,9 @@ type GoogleCloudDiscoveryengineV1betaImportDocumentsRequestInlineSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportDocumentsRequestInlineSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportDocumentsRequestInlineSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportDocumentsRequestInlineSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportDocumentsResponse: Response of the
@@ -9803,9 +10427,9 @@ type GoogleCloudDiscoveryengineV1betaImportDocumentsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportDocumentsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportDocumentsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportDocumentsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportErrorConfig: Configuration of
@@ -9829,9 +10453,9 @@ type GoogleCloudDiscoveryengineV1betaImportErrorConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportErrorConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportErrorConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportErrorConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesMetadata:
@@ -9857,9 +10481,9 @@ type GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesMetadata str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequest:
@@ -9888,9 +10512,9 @@ type GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequest stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequestInlineS
@@ -9912,9 +10536,9 @@ type GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequestInlin
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequestInlineSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequestInlineSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesRequestInlineSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesResponse:
@@ -9940,9 +10564,9 @@ type GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesResponse str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportSuggestionDenyListEntriesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportUserEventsMetadata: Metadata related
@@ -9971,9 +10595,9 @@ type GoogleCloudDiscoveryengineV1betaImportUserEventsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportUserEventsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportUserEventsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportUserEventsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportUserEventsRequest: Request message for
@@ -10001,9 +10625,9 @@ type GoogleCloudDiscoveryengineV1betaImportUserEventsRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportUserEventsRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportUserEventsRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportUserEventsRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportUserEventsRequestInlineSource: The
@@ -10025,9 +10649,9 @@ type GoogleCloudDiscoveryengineV1betaImportUserEventsRequestInlineSource struct 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportUserEventsRequestInlineSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportUserEventsRequestInlineSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportUserEventsRequestInlineSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaImportUserEventsResponse: Response of the
@@ -10059,9 +10683,9 @@ type GoogleCloudDiscoveryengineV1betaImportUserEventsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaImportUserEventsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaImportUserEventsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaImportUserEventsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaInterval: A floating point interval.
@@ -10087,9 +10711,9 @@ type GoogleCloudDiscoveryengineV1betaInterval struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaInterval) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaInterval) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaInterval
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaInterval) UnmarshalJSON(data []byte) error {
@@ -10110,6 +10734,38 @@ func (s *GoogleCloudDiscoveryengineV1betaInterval) UnmarshalJSON(data []byte) er
 	s.Maximum = float64(s1.Maximum)
 	s.Minimum = float64(s1.Minimum)
 	return nil
+}
+
+// GoogleCloudDiscoveryengineV1betaLanguageInfo: Language info for DataStore.
+type GoogleCloudDiscoveryengineV1betaLanguageInfo struct {
+	// Language: Output only. Language part of normalized_language_code. E.g.:
+	// `en-US` -> `en`, `zh-Hans-HK` -> `zh`, `en` -> `en`.
+	Language string `json:"language,omitempty"`
+	// LanguageCode: The language code for the DataStore.
+	LanguageCode string `json:"languageCode,omitempty"`
+	// NormalizedLanguageCode: Output only. This is the normalized form of
+	// language_code. E.g.: language_code of `en-GB`, `en_GB`, `en-UK` or `en-gb`
+	// will have normalized_language_code of `en-GB`.
+	NormalizedLanguageCode string `json:"normalizedLanguageCode,omitempty"`
+	// Region: Output only. Region part of normalized_language_code, if present.
+	// E.g.: `en-US` -> `US`, `zh-Hans-HK` -> `HK`, `en` -> ``.
+	Region string `json:"region,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Language") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Language") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaLanguageInfo) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaLanguageInfo
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListControlsResponse: Response for
@@ -10135,9 +10791,9 @@ type GoogleCloudDiscoveryengineV1betaListControlsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListControlsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListControlsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListControlsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListConversationsResponse: Response for
@@ -10163,9 +10819,9 @@ type GoogleCloudDiscoveryengineV1betaListConversationsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListConversationsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListConversationsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListConversationsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListCustomModelsResponse: Response message
@@ -10189,9 +10845,9 @@ type GoogleCloudDiscoveryengineV1betaListCustomModelsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListCustomModelsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListCustomModelsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListCustomModelsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListDataStoresResponse: Response message for
@@ -10219,9 +10875,9 @@ type GoogleCloudDiscoveryengineV1betaListDataStoresResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListDataStoresResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListDataStoresResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListDataStoresResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListDocumentsResponse: Response message for
@@ -10249,9 +10905,9 @@ type GoogleCloudDiscoveryengineV1betaListDocumentsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListDocumentsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListDocumentsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListDocumentsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListEnginesResponse: Response message for
@@ -10277,9 +10933,9 @@ type GoogleCloudDiscoveryengineV1betaListEnginesResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListEnginesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListEnginesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListEnginesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListSchemasResponse: Response message for
@@ -10307,9 +10963,9 @@ type GoogleCloudDiscoveryengineV1betaListSchemasResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListSchemasResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListSchemasResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListSchemasResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListServingConfigsResponse: Response for
@@ -10335,9 +10991,9 @@ type GoogleCloudDiscoveryengineV1betaListServingConfigsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListServingConfigsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListServingConfigsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListServingConfigsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListSessionsResponse: Response for
@@ -10363,9 +11019,9 @@ type GoogleCloudDiscoveryengineV1betaListSessionsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListSessionsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListSessionsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListSessionsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaListTargetSitesResponse: Response message
@@ -10395,9 +11051,9 @@ type GoogleCloudDiscoveryengineV1betaListTargetSitesResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaListTargetSitesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaListTargetSitesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaListTargetSitesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaMediaInfo: Media-specific user event
@@ -10425,9 +11081,9 @@ type GoogleCloudDiscoveryengineV1betaMediaInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaMediaInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaMediaInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaMediaInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaMediaInfo) UnmarshalJSON(data []byte) error {
@@ -10486,9 +11142,9 @@ type GoogleCloudDiscoveryengineV1betaPageInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaPageInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaPageInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaPageInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaPanelInfo: Detailed panel information
@@ -10517,9 +11173,9 @@ type GoogleCloudDiscoveryengineV1betaPanelInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaPanelInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaPanelInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaPanelInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaPauseEngineRequest: Request for pausing
@@ -10557,9 +11213,9 @@ type GoogleCloudDiscoveryengineV1betaProject struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaProject) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaProject) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaProject
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaProjectServiceTerms: Metadata about the
@@ -10603,9 +11259,9 @@ type GoogleCloudDiscoveryengineV1betaProjectServiceTerms struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaProjectServiceTerms) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaProjectServiceTerms) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaProjectServiceTerms
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaProvisionProjectMetadata: Metadata
@@ -10638,9 +11294,14 @@ type GoogleCloudDiscoveryengineV1betaProvisionProjectRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaProvisionProjectRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaProvisionProjectRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaProvisionProjectRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaPurgeCompletionSuggestionsRequest: Request
+// message for CompletionService.PurgeCompletionSuggestions method.
+type GoogleCloudDiscoveryengineV1betaPurgeCompletionSuggestionsRequest struct {
 }
 
 // GoogleCloudDiscoveryengineV1betaPurgeDocumentsMetadata: Metadata related to
@@ -10671,9 +11332,9 @@ type GoogleCloudDiscoveryengineV1betaPurgeDocumentsMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaPurgeDocumentsMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaPurgeDocumentsMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaPurgeDocumentsMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaPurgeDocumentsRequest: Request message for
@@ -10698,9 +11359,9 @@ type GoogleCloudDiscoveryengineV1betaPurgeDocumentsRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaPurgeDocumentsRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaPurgeDocumentsRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaPurgeDocumentsRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaPurgeDocumentsResponse: Response message for
@@ -10728,9 +11389,9 @@ type GoogleCloudDiscoveryengineV1betaPurgeDocumentsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaPurgeDocumentsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaPurgeDocumentsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaPurgeDocumentsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesMetadata:
@@ -10756,9 +11417,9 @@ type GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesMetadata stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesRequest:
@@ -10787,9 +11448,9 @@ type GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesResponse stru
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaPurgeSuggestionDenyListEntriesResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaQuery: Defines a user inputed query.
@@ -10811,9 +11472,9 @@ type GoogleCloudDiscoveryengineV1betaQuery struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaQuery) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaQuery) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaQuery
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaRankRequest: Request message for
@@ -10861,9 +11522,9 @@ type GoogleCloudDiscoveryengineV1betaRankRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaRankRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaRankRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaRankRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaRankResponse: Response message for
@@ -10887,9 +11548,9 @@ type GoogleCloudDiscoveryengineV1betaRankResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaRankResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaRankResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaRankResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaRankingRecord: Record message for
@@ -10918,9 +11579,9 @@ type GoogleCloudDiscoveryengineV1betaRankingRecord struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaRankingRecord) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaRankingRecord) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaRankingRecord
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaRankingRecord) UnmarshalJSON(data []byte) error {
@@ -11018,9 +11679,9 @@ type GoogleCloudDiscoveryengineV1betaRecommendRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaRecommendRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaRecommendRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaRecommendRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaRecommendResponse: Response message for
@@ -11054,9 +11715,9 @@ type GoogleCloudDiscoveryengineV1betaRecommendResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaRecommendResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaRecommendResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaRecommendResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaRecommendResponseRecommendationResult:
@@ -11084,9 +11745,9 @@ type GoogleCloudDiscoveryengineV1betaRecommendResponseRecommendationResult struc
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaRecommendResponseRecommendationResult) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaRecommendResponseRecommendationResult) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaRecommendResponseRecommendationResult
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaRecrawlUrisRequest: Request message for
@@ -11109,9 +11770,9 @@ type GoogleCloudDiscoveryengineV1betaRecrawlUrisRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaRecrawlUrisRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaRecrawlUrisRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaRecrawlUrisRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaReply: Defines a reply message to user.
@@ -11135,9 +11796,9 @@ type GoogleCloudDiscoveryengineV1betaReply struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaReply) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaReply) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaReply
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaReplyReference: Defines reference in reply.
@@ -11163,9 +11824,9 @@ type GoogleCloudDiscoveryengineV1betaReplyReference struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaReplyReference) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaReplyReference) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaReplyReference
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaResumeEngineRequest: Request for resuming
@@ -11201,9 +11862,9 @@ type GoogleCloudDiscoveryengineV1betaSchema struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSchema) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSchema) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSchema
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchInfo: Detailed search information.
@@ -11242,9 +11903,9 @@ type GoogleCloudDiscoveryengineV1betaSearchInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequest: Request message for
@@ -11302,6 +11963,16 @@ type GoogleCloudDiscoveryengineV1betaSearchRequest struct {
 	Filter string `json:"filter,omitempty"`
 	// ImageQuery: Raw image query.
 	ImageQuery *GoogleCloudDiscoveryengineV1betaSearchRequestImageQuery `json:"imageQuery,omitempty"`
+	// LanguageCode: The BCP-47 language code, such as "en-US" or "sr-Latn". For
+	// more information, see Standard fields
+	// (https://cloud.google.com/apis/design/standard_fields). This field helps to
+	// better interpret the query. If a value isn't specified, the query language
+	// code is automatically detected, which may not be accurate.
+	LanguageCode string `json:"languageCode,omitempty"`
+	// NaturalLanguageQueryUnderstandingSpec: If
+	// `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+	// natural language query understanding will be done.
+	NaturalLanguageQueryUnderstandingSpec *GoogleCloudDiscoveryengineV1betaSearchRequestNaturalLanguageQueryUnderstandingSpec `json:"naturalLanguageQueryUnderstandingSpec,omitempty"`
 	// Offset: A 0-indexed integer that specifies the current offset (that is,
 	// starting result location, amongst the Documents deemed by the API as
 	// relevant) in search results. This field is only considered if page_token is
@@ -11343,20 +12014,49 @@ type GoogleCloudDiscoveryengineV1betaSearchRequest struct {
 	QueryExpansionSpec *GoogleCloudDiscoveryengineV1betaSearchRequestQueryExpansionSpec `json:"queryExpansionSpec,omitempty"`
 	// RankingExpression: The ranking expression controls the customized ranking on
 	// retrieval documents. This overrides ServingConfig.ranking_expression. The
-	// ranking expression is a single function or multiple functions that are joint
-	// by "+". * ranking_expression = function, { " + ", function }; Supported
-	// functions: * double * relevance_score * double *
-	// dotProduct(embedding_field_path) Function variables: `relevance_score`:
+	// ranking expression is a single function or multiple functions that are
+	// joined by "+". * ranking_expression = function, { " + ", function };
+	// Supported functions: * double * relevance_score * double *
+	// dotProduct(embedding_field_path) Function variables: * `relevance_score`:
 	// pre-defined keywords, used for measure relevance between query and document.
-	// `embedding_field_path`: the document embedding field used with query
-	// embedding vector. `dotProduct`: embedding function between
+	// * `embedding_field_path`: the document embedding field used with query
+	// embedding vector. * `dotProduct`: embedding function between
 	// embedding_field_path and query embedding vector. Example ranking expression:
 	// If document has an embedding field doc_embedding, the ranking expression
 	// could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
 	RankingExpression string `json:"rankingExpression,omitempty"`
+	// RegionCode: The Unicode country/region code (CLDR) of a location, such as
+	// "US" and "419". For more information, see Standard fields
+	// (https://cloud.google.com/apis/design/standard_fields). If set, then results
+	// will be boosted based on the region_code provided.
+	RegionCode string `json:"regionCode,omitempty"`
 	// SafeSearch: Whether to turn on safe search. This is only supported for
 	// website search.
 	SafeSearch bool `json:"safeSearch,omitempty"`
+	// SearchAsYouTypeSpec: Search as you type configuration. Only supported for
+	// the IndustryVertical.MEDIA vertical.
+	SearchAsYouTypeSpec *GoogleCloudDiscoveryengineV1betaSearchRequestSearchAsYouTypeSpec `json:"searchAsYouTypeSpec,omitempty"`
+	// Session: The session resource name. Optional. Session allows users to do
+	// multi-turn /search API calls or coordination between /search API calls and
+	// /answer API calls. Example #1 (multi-turn /search API calls): 1. Call
+	// /search API with the auto-session mode (see below). 2. Call /search API with
+	// the session ID generated in the first call. Here, the previous search query
+	// gets considered in query standing. I.e., if the first query is "How did
+	// Alphabet do in 2022?" and the current query is "How about 2023?", the
+	// current query will be interpreted as "How did Alphabet do in 2023?". Example
+	// #2 (coordination between /search API calls and /answer API calls): 1. Call
+	// /search API with the auto-session mode (see below). 2. Call /answer API with
+	// the session ID generated in the first call. Here, the answer generation
+	// happens in the context of the search results from the first search call.
+	// Auto-session mode: when `projects/.../sessions/-` is used, a new session
+	// gets automatically created. Otherwise, users can use the create-session API
+	// to create a session manually. Multi-turn Search feature is currently at
+	// private GA stage. Please use v1alpha or v1beta version instead before we
+	// launch this feature to public GA. Or ask for allowlisting through Google
+	// Support team.
+	Session string `json:"session,omitempty"`
+	// SessionSpec: Session specification. Can be used only when `session` is set.
+	SessionSpec *GoogleCloudDiscoveryengineV1betaSearchRequestSessionSpec `json:"sessionSpec,omitempty"`
 	// SpellCorrectionSpec: The spell correction specification that specifies the
 	// mode under which spell correction takes effect.
 	SpellCorrectionSpec *GoogleCloudDiscoveryengineV1betaSearchRequestSpellCorrectionSpec `json:"spellCorrectionSpec,omitempty"`
@@ -11399,9 +12099,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpec: Boost specification
@@ -11425,9 +12125,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpec:
@@ -11470,9 +12170,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpec st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpec) UnmarshalJSON(data []byte) error {
@@ -11540,9 +12240,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoo
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoostControlSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoostControlSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoostControlSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoost
@@ -11571,9 +12271,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoo
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoostControlSpecControlPoint) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoostControlSpecControlPoint) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoostControlSpecControlPoint
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaSearchRequestBoostSpecConditionBoostSpecBoostControlSpecControlPoint) UnmarshalJSON(data []byte) error {
@@ -11631,9 +12331,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecChunkSpec:
@@ -11662,9 +12362,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecChunkSpec str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecChunkSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecChunkSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecChunkSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecExtractiveConte
@@ -11714,9 +12414,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecExtractiveCon
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecExtractiveContentSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecExtractiveContentSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecExtractiveContentSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSnippetSpec: A
@@ -11747,9 +12447,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSnippetSpec s
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSnippetSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSnippetSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSnippetSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpec: A
@@ -11821,9 +12521,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpec s
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecMode
@@ -11845,9 +12545,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecMo
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelPromptSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelPromptSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelPromptSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecMode
@@ -11875,15 +12575,14 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecMo
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestContentSearchSpecSummarySpecModelSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestDataStoreSpec: A struct to
 // define data stores to filter on in a search call and configurations for
-// those data stores. A maximum of 1 DataStoreSpec per data_store is allowed.
-// Otherwise, an `INVALID_ARGUMENT` error is returned.
+// those data stores. Otherwise, an `INVALID_ARGUMENT` error is returned.
 type GoogleCloudDiscoveryengineV1betaSearchRequestDataStoreSpec struct {
 	// DataStore: Required. Full resource name of DataStore, such as
 	// `projects/{project}/locations/{location}/collections/{collection_id}/dataStor
@@ -11902,9 +12601,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestDataStoreSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestDataStoreSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestDataStoreSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestDataStoreSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec: The
@@ -11926,9 +12625,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpecEmbeddingVector:
@@ -11951,9 +12650,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpecEmbeddingVector s
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpecEmbeddingVector) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpecEmbeddingVector) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpecEmbeddingVector
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaSearchRequestEmbeddingSpecEmbeddingVector) UnmarshalJSON(data []byte) error {
@@ -12017,8 +12716,10 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpec struct {
 	FacetKey *GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpecFacetKey `json:"facetKey,omitempty"`
 	// Limit: Maximum facet values that are returned for this facet. If
 	// unspecified, defaults to 20. The maximum allowed value is 300. Values above
-	// 300 are coerced to 300. If this field is negative, an `INVALID_ARGUMENT` is
-	// returned.
+	// 300 are coerced to 300. For aggregation in healthcare search, when the
+	// [FacetKey.key] is "healthcare_aggregation_key", the limit will be overridden
+	// to 10,000 internally, regardless of the value set here. If this field is
+	// negative, an `INVALID_ARGUMENT` is returned.
 	Limit int64 `json:"limit,omitempty"`
 	// ForceSendFields is a list of field names (e.g. "EnableDynamicPosition") to
 	// unconditionally include in API requests. By default, fields with empty or
@@ -12033,9 +12734,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpecFacetKey: Specifies
@@ -12091,9 +12792,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpecFacetKey struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpecFacetKey) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpecFacetKey) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestFacetSpecFacetKey
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestImageQuery: Specifies the image
@@ -12115,9 +12816,45 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestImageQuery struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestImageQuery) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestImageQuery) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestImageQuery
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchRequestNaturalLanguageQueryUnderstandin
+// gSpec: Specification to enable natural language understanding capabilities
+// for search requests.
+type GoogleCloudDiscoveryengineV1betaSearchRequestNaturalLanguageQueryUnderstandingSpec struct {
+	// FilterExtractionCondition: The condition under which filter extraction
+	// should occur. Default to Condition.DISABLED.
+	//
+	// Possible values:
+	//   "CONDITION_UNSPECIFIED" - Server behavior defaults to Condition.DISABLED.
+	//   "DISABLED" - Disables NL filter extraction.
+	//   "ENABLED" - Enables NL filter extraction.
+	FilterExtractionCondition string `json:"filterExtractionCondition,omitempty"`
+	// GeoSearchQueryDetectionFieldNames: Field names used for location-based
+	// filtering, where geolocation filters are detected in natural language search
+	// queries. Only valid when the FilterExtractionCondition is set to `ENABLED`.
+	// If this field is set, it overrides the field names set in
+	// Servingconfig.geo_search_query_detection_field_names.
+	GeoSearchQueryDetectionFieldNames []string `json:"geoSearchQueryDetectionFieldNames,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "FilterExtractionCondition")
+	// to unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "FilterExtractionCondition") to
+	// include in API requests with the JSON null value. By default, fields with
+	// empty values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestNaturalLanguageQueryUnderstandingSpec) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestNaturalLanguageQueryUnderstandingSpec
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestQueryExpansionSpec:
@@ -12151,9 +12888,79 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestQueryExpansionSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestQueryExpansionSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestQueryExpansionSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestQueryExpansionSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchRequestSearchAsYouTypeSpec:
+// Specification for search as you type in search requests.
+type GoogleCloudDiscoveryengineV1betaSearchRequestSearchAsYouTypeSpec struct {
+	// Condition: The condition under which search as you type should occur.
+	// Default to Condition.DISABLED.
+	//
+	// Possible values:
+	//   "CONDITION_UNSPECIFIED" - Server behavior defaults to Condition.DISABLED.
+	//   "DISABLED" - Disables Search As You Type.
+	//   "ENABLED" - Enables Search As You Type.
+	Condition string `json:"condition,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Condition") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Condition") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestSearchAsYouTypeSpec) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestSearchAsYouTypeSpec
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchRequestSessionSpec: Session
+// specification. Multi-turn Search feature is currently at private GA stage.
+// Please use v1alpha or v1beta version instead before we launch this feature
+// to public GA. Or ask for allowlisting through Google Support team.
+type GoogleCloudDiscoveryengineV1betaSearchRequestSessionSpec struct {
+	// QueryId: If set, the search result gets stored to the "turn" specified by
+	// this query ID. Example: Let's say the session looks like this: session {
+	// name: ".../sessions/xxx" turns { query { text: "What is foo?" query_id:
+	// ".../questions/yyy" } answer: "Foo is ..." } turns { query { text: "How
+	// about bar then?" query_id: ".../questions/zzz" } } } The user can call
+	// /search API with a request like this: session: ".../sessions/xxx"
+	// session_spec { query_id: ".../questions/zzz" } Then, the API stores the
+	// search result, associated with the last turn. The stored search result can
+	// be used by a subsequent /answer API call (with the session ID and the query
+	// ID specified). Also, it is possible to call /search and /answer in parallel
+	// with the same session ID & query ID.
+	QueryId string `json:"queryId,omitempty"`
+	// SearchResultPersistenceCount: The number of top search results to persist.
+	// The persisted search results can be used for the subsequent /answer api
+	// call. This field is simliar to the `summary_result_count` field in
+	// SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count. At most 10
+	// results for documents mode, or 50 for chunks mode.
+	SearchResultPersistenceCount int64 `json:"searchResultPersistenceCount,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "QueryId") to unconditionally
+	// include in API requests. By default, fields with empty or default values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "QueryId") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestSessionSpec) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestSessionSpec
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchRequestSpellCorrectionSpec: The
@@ -12184,9 +12991,9 @@ type GoogleCloudDiscoveryengineV1betaSearchRequestSpellCorrectionSpec struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchRequestSpellCorrectionSpec) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchRequestSpellCorrectionSpec) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchRequestSpellCorrectionSpec
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponse: Response message for
@@ -12207,6 +13014,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponse struct {
 	GeoSearchDebugInfo []*GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo `json:"geoSearchDebugInfo,omitempty"`
 	// GuidedSearchResult: Guided search result.
 	GuidedSearchResult *GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult `json:"guidedSearchResult,omitempty"`
+	// NaturalLanguageQueryUnderstandingInfo: Natural language query understanding
+	// information for the returned results.
+	NaturalLanguageQueryUnderstandingInfo *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfo `json:"naturalLanguageQueryUnderstandingInfo,omitempty"`
 	// NextPageToken: A token that can be sent as SearchRequest.page_token to
 	// retrieve the next page. If this field is omitted, there are no subsequent
 	// pages.
@@ -12219,6 +13029,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponse struct {
 	RedirectUri string `json:"redirectUri,omitempty"`
 	// Results: A list of matched documents. The order represents the ranking.
 	Results []*GoogleCloudDiscoveryengineV1betaSearchResponseSearchResult `json:"results,omitempty"`
+	// SessionInfo: Session information. Only set if SearchRequest.session is
+	// provided. See its description for more details.
+	SessionInfo *GoogleCloudDiscoveryengineV1betaSearchResponseSessionInfo `json:"sessionInfo,omitempty"`
 	// Summary: A summary as part of the search results. This field is only
 	// returned if SearchRequest.ContentSearchSpec.summary_spec is set.
 	Summary *GoogleCloudDiscoveryengineV1betaSearchResponseSummary `json:"summary,omitempty"`
@@ -12242,9 +13055,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseFacet: A facet result.
@@ -12269,9 +13082,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseFacet struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseFacet) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseFacet) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseFacet
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseFacetFacetValue: A facet value
@@ -12297,9 +13110,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseFacetFacetValue struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseFacetFacetValue) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseFacetFacetValue) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseFacetFacetValue
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo: Debug
@@ -12324,9 +13137,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult: Guided
@@ -12350,9 +13163,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResultRefinementAtt
@@ -12377,9 +13190,267 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResultRefinementA
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResultRefinementAttribute) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResultRefinementAttribute) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResultRefinementAttribute
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfo: Information describing what natural language understanding was done
+// on the input query.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfo struct {
+	// ExtractedFilters: The filters that were extracted from the input query.
+	ExtractedFilters string `json:"extractedFilters,omitempty"`
+	// RewrittenQuery: Rewritten input query minus the extracted filters.
+	RewrittenQuery string `json:"rewrittenQuery,omitempty"`
+	// StructuredExtractedFilter: The filters that were extracted from the input
+	// query represented in a structured form.
+	StructuredExtractedFilter *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilter `json:"structuredExtractedFilter,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "ExtractedFilters") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "ExtractedFilters") to include in
+	// API requests with the JSON null value. By default, fields with empty values
+	// are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfo) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfo
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfoStructuredExtractedFilter: The filters that were extracted from the
+// input query represented in a structured form.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilter struct {
+	// Expression: The expression denoting the filter that was extracted from the
+	// input query in a structured form. It can be a simple expression denoting a
+	// single string, numerical or geolocation constraint or a compound expression
+	// which is a combination of multiple expressions connected using logical (OR
+	// and AND) operators.
+	Expression *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterExpression `json:"expression,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Expression") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Expression") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilter) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilter
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfoStructuredExtractedFilterAndExpression: Logical `And` operator.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterAndExpression struct {
+	// Expressions: The expressions that were ANDed together.
+	Expressions []*GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterExpression `json:"expressions,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Expressions") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Expressions") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterAndExpression) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterAndExpression
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfoStructuredExtractedFilterExpression: The expression denoting the
+// filter that was extracted from the input query.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterExpression struct {
+	// AndExpr: Logical "And" compound operator connecting multiple expressions.
+	AndExpr *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterAndExpression `json:"andExpr,omitempty"`
+	// GeolocationConstraint: Geolocation constraint expression.
+	GeolocationConstraint *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterGeolocationConstraint `json:"geolocationConstraint,omitempty"`
+	// NumberConstraint: Numerical constraint expression.
+	NumberConstraint *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterNumberConstraint `json:"numberConstraint,omitempty"`
+	// OrExpr: Logical "Or" compound operator connecting multiple expressions.
+	OrExpr *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterOrExpression `json:"orExpr,omitempty"`
+	// StringConstraint: String constraint expression.
+	StringConstraint *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterStringConstraint `json:"stringConstraint,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "AndExpr") to unconditionally
+	// include in API requests. By default, fields with empty or default values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "AndExpr") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterExpression) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterExpression
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfoStructuredExtractedFilterGeolocationConstraint: Constraint of a
+// geolocation field. Name of the geolocation field as defined in the schema.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterGeolocationConstraint struct {
+	// Address: The reference address that was inferred from the input query. The
+	// proximity of the reference address to the geolocation field will be used to
+	// filter the results.
+	Address string `json:"address,omitempty"`
+	// FieldName: The name of the geolocation field as defined in the schema.
+	FieldName string `json:"fieldName,omitempty"`
+	// RadiusInMeters: The radius in meters around the address. The record is
+	// returned if the location of the geolocation field is within the radius.
+	RadiusInMeters float64 `json:"radiusInMeters,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Address") to unconditionally
+	// include in API requests. By default, fields with empty or default values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Address") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterGeolocationConstraint) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterGeolocationConstraint
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+func (s *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterGeolocationConstraint) UnmarshalJSON(data []byte) error {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterGeolocationConstraint
+	var s1 struct {
+		RadiusInMeters gensupport.JSONFloat64 `json:"radiusInMeters"`
+		*NoMethod
+	}
+	s1.NoMethod = (*NoMethod)(s)
+	if err := json.Unmarshal(data, &s1); err != nil {
+		return err
+	}
+	s.RadiusInMeters = float64(s1.RadiusInMeters)
+	return nil
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfoStructuredExtractedFilterNumberConstraint: Constraint expression of a
+// number field. Example: price < 100.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterNumberConstraint struct {
+	// Comparison: The comparison operation performed between the field value and
+	// the value specified in the constraint.
+	//
+	// Possible values:
+	//   "COMPARISON_UNSPECIFIED" - Undefined comparison operator.
+	//   "EQUALS" - Denotes equality `=` operator.
+	//   "LESS_THAN_EQUALS" - Denotes less than or equal to `<=` operator.
+	//   "LESS_THAN" - Denotes less than `<` operator.
+	//   "GREATER_THAN_EQUALS" - Denotes greater than or equal to `>=` operator.
+	//   "GREATER_THAN" - Denotes greater than `>` operator.
+	Comparison string `json:"comparison,omitempty"`
+	// FieldName: Name of the numerical field as defined in the schema.
+	FieldName string `json:"fieldName,omitempty"`
+	// Value: The value specified in the numerical constraint.
+	Value float64 `json:"value,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Comparison") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Comparison") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterNumberConstraint) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterNumberConstraint
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+func (s *GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterNumberConstraint) UnmarshalJSON(data []byte) error {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterNumberConstraint
+	var s1 struct {
+		Value gensupport.JSONFloat64 `json:"value"`
+		*NoMethod
+	}
+	s1.NoMethod = (*NoMethod)(s)
+	if err := json.Unmarshal(data, &s1); err != nil {
+		return err
+	}
+	s.Value = float64(s1.Value)
+	return nil
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfoStructuredExtractedFilterOrExpression: Logical `Or` operator.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterOrExpression struct {
+	// Expressions: The expressions that were ORed together.
+	Expressions []*GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterExpression `json:"expressions,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Expressions") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Expressions") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterOrExpression) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterOrExpression
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandi
+// ngInfoStructuredExtractedFilterStringConstraint: Constraint expression of a
+// string field.
+type GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterStringConstraint struct {
+	// FieldName: Name of the string field as defined in the schema.
+	FieldName string `json:"fieldName,omitempty"`
+	// Values: Values of the string field. The record will only be returned if the
+	// field value matches one of the values specified here.
+	Values []string `json:"values,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "FieldName") to
+	// unconditionally include in API requests. By default, fields with empty or
+	// default values are omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "FieldName") to include in API
+	// requests with the JSON null value. By default, fields with empty values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterStringConstraint) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseNaturalLanguageQueryUnderstandingInfoStructuredExtractedFilterStringConstraint
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseQueryExpansionInfo:
@@ -12405,9 +13476,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseQueryExpansionInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseQueryExpansionInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseQueryExpansionInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseQueryExpansionInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSearchResult: Represents the
@@ -12436,9 +13507,39 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSearchResult struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSearchResult) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSearchResult) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSearchResult
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
+}
+
+// GoogleCloudDiscoveryengineV1betaSearchResponseSessionInfo: Information about
+// the session.
+type GoogleCloudDiscoveryengineV1betaSearchResponseSessionInfo struct {
+	// Name: Name of the session. If the auto-session mode is used (when
+	// SearchRequest.session ends with "-"), this field holds the newly generated
+	// session name.
+	Name string `json:"name,omitempty"`
+	// QueryId: Query ID that corresponds to this search API call. One session can
+	// have multiple turns, each with a unique query ID. By specifying the session
+	// name and this query ID in the Answer API call, the answer generation happens
+	// in the context of the search results from this search call.
+	QueryId string `json:"queryId,omitempty"`
+	// ForceSendFields is a list of field names (e.g. "Name") to unconditionally
+	// include in API requests. By default, fields with empty or default values are
+	// omitted from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-ForceSendFields for more
+	// details.
+	ForceSendFields []string `json:"-"`
+	// NullFields is a list of field names (e.g. "Name") to include in API requests
+	// with the JSON null value. By default, fields with empty values are omitted
+	// from API requests. See
+	// https://pkg.go.dev/google.golang.org/api#hdr-NullFields for more details.
+	NullFields []string `json:"-"`
+}
+
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSessionInfo) MarshalJSON() ([]byte, error) {
+	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSessionInfo
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSummary: Summary of the top N
@@ -12485,9 +13586,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummary struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummary) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummary) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummary
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitation: Citation info
@@ -12513,9 +13614,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitation) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationMetadata:
@@ -12536,9 +13637,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationMetadata struc
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationSource:
@@ -12561,9 +13662,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationSource struct 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummaryCitationSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReference: Document
@@ -12592,9 +13693,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReference struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReference) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReference) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReference
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReferenceChunkContent:
@@ -12617,9 +13718,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReferenceChunkContent 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReferenceChunkContent) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReferenceChunkContent) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummaryReferenceChunkContent
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes:
@@ -12644,9 +13745,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes struc
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummarySafetyAttributes) UnmarshalJSON(data []byte) error {
@@ -12688,9 +13789,9 @@ type GoogleCloudDiscoveryengineV1betaSearchResponseSummarySummaryWithMetadata st
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSearchResponseSummarySummaryWithMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSearchResponseSummarySummaryWithMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSearchResponseSummarySummaryWithMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaServingConfig: Configures metadata that is
@@ -12762,13 +13863,13 @@ type GoogleCloudDiscoveryengineV1betaServingConfig struct {
 	// expression is a single function or multiple functions that are joined by
 	// "+". * ranking_expression = function, { " + ", function }; Supported
 	// functions: * double * relevance_score * double *
-	// dotProduct(embedding_field_path) Function variables: relevance_score:
+	// dotProduct(embedding_field_path) Function variables: * `relevance_score`:
 	// pre-defined keywords, used for measure relevance between query and document.
-	// embedding_field_path: the document embedding field used with query embedding
-	// vector. dotProduct: embedding function between embedding_field_path and
-	// query embedding vector. Example ranking expression: If document has an
-	// embedding field doc_embedding, the ranking expression could be 0.5 *
-	// relevance_score + 0.3 * dotProduct(doc_embedding).
+	// * `embedding_field_path`: the document embedding field used with query
+	// embedding vector. * `dotProduct`: embedding function between
+	// embedding_field_path and query embedding vector. Example ranking expression:
+	// If document has an embedding field doc_embedding, the ranking expression
+	// could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
 	RankingExpression string `json:"rankingExpression,omitempty"`
 	// RedirectControlIds: IDs of the redirect controls. Only the first triggered
 	// redirect action is applied, even if multiple apply. Maximum number of
@@ -12816,9 +13917,9 @@ type GoogleCloudDiscoveryengineV1betaServingConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaServingConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaServingConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaServingConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaServingConfigGenericConfig: Specifies the
@@ -12841,9 +13942,9 @@ type GoogleCloudDiscoveryengineV1betaServingConfigGenericConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaServingConfigGenericConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaServingConfigGenericConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaServingConfigGenericConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaServingConfigMediaConfig: Specifies the
@@ -12888,9 +13989,9 @@ type GoogleCloudDiscoveryengineV1betaServingConfigMediaConfig struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaServingConfigMediaConfig) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaServingConfigMediaConfig) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaServingConfigMediaConfig
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaServingConfigMediaConfig) UnmarshalJSON(data []byte) error {
@@ -12945,9 +14046,9 @@ type GoogleCloudDiscoveryengineV1betaSession struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSession) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSession) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSession
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSessionTurn: Represents a turn, including a
@@ -12971,9 +14072,9 @@ type GoogleCloudDiscoveryengineV1betaSessionTurn struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSessionTurn) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSessionTurn) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSessionTurn
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSiteSearchEngine: SiteSearchEngine captures
@@ -12999,9 +14100,9 @@ type GoogleCloudDiscoveryengineV1betaSiteSearchEngine struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSiteSearchEngine) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSiteSearchEngine) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSiteSearchEngine
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSiteVerificationInfo: Verification
@@ -13032,9 +14133,9 @@ type GoogleCloudDiscoveryengineV1betaSiteVerificationInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSiteVerificationInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSiteVerificationInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSiteVerificationInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSpannerSource: The Spanner source for
@@ -13068,9 +14169,9 @@ type GoogleCloudDiscoveryengineV1betaSpannerSource struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSpannerSource) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSpannerSource) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSpannerSource
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaSuggestionDenyListEntry: Suggestion deny
@@ -13103,9 +14204,9 @@ type GoogleCloudDiscoveryengineV1betaSuggestionDenyListEntry struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaSuggestionDenyListEntry) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaSuggestionDenyListEntry) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaSuggestionDenyListEntry
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTargetSite: A target site for the
@@ -13176,9 +14277,9 @@ type GoogleCloudDiscoveryengineV1betaTargetSite struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTargetSite) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTargetSite) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTargetSite
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTargetSiteFailureReason: Site search
@@ -13199,9 +14300,9 @@ type GoogleCloudDiscoveryengineV1betaTargetSiteFailureReason struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTargetSiteFailureReason) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTargetSiteFailureReason) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTargetSiteFailureReason
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTargetSiteFailureReasonQuotaFailure: Failed
@@ -13223,9 +14324,9 @@ type GoogleCloudDiscoveryengineV1betaTargetSiteFailureReasonQuotaFailure struct 
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTargetSiteFailureReasonQuotaFailure) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTargetSiteFailureReasonQuotaFailure) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTargetSiteFailureReasonQuotaFailure
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTextInput: Defines text input.
@@ -13247,9 +14348,9 @@ type GoogleCloudDiscoveryengineV1betaTextInput struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTextInput) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTextInput) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTextInput
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTrainCustomModelMetadata: Metadata related
@@ -13274,9 +14375,9 @@ type GoogleCloudDiscoveryengineV1betaTrainCustomModelMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTrainCustomModelMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTrainCustomModelMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTrainCustomModelMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTrainCustomModelRequest: Request message for
@@ -13305,9 +14406,9 @@ type GoogleCloudDiscoveryengineV1betaTrainCustomModelRequest struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTrainCustomModelRequest) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTrainCustomModelRequest) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTrainCustomModelRequest
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTrainCustomModelRequestGcsTrainingInput:
@@ -13348,9 +14449,9 @@ type GoogleCloudDiscoveryengineV1betaTrainCustomModelRequestGcsTrainingInput str
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTrainCustomModelRequestGcsTrainingInput) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTrainCustomModelRequestGcsTrainingInput) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTrainCustomModelRequestGcsTrainingInput
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTrainCustomModelResponse: Response of the
@@ -13387,9 +14488,9 @@ type GoogleCloudDiscoveryengineV1betaTrainCustomModelResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTrainCustomModelResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTrainCustomModelResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTrainCustomModelResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTransactionInfo: A transaction represents
@@ -13431,9 +14532,9 @@ type GoogleCloudDiscoveryengineV1betaTransactionInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTransactionInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTransactionInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTransactionInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 func (s *GoogleCloudDiscoveryengineV1betaTransactionInfo) UnmarshalJSON(data []byte) error {
@@ -13477,9 +14578,9 @@ type GoogleCloudDiscoveryengineV1betaTuneEngineMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaTuneEngineMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaTuneEngineMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaTuneEngineMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaTuneEngineRequest: Request to manually start
@@ -13514,9 +14615,9 @@ type GoogleCloudDiscoveryengineV1betaUpdateSchemaMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaUpdateSchemaMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaUpdateSchemaMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaUpdateSchemaMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaUpdateTargetSiteMetadata: Metadata related
@@ -13541,9 +14642,9 @@ type GoogleCloudDiscoveryengineV1betaUpdateTargetSiteMetadata struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaUpdateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaUpdateTargetSiteMetadata) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaUpdateTargetSiteMetadata
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaUserEvent: UserEvent captures all metadata
@@ -13697,9 +14798,9 @@ type GoogleCloudDiscoveryengineV1betaUserEvent struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaUserEvent) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaUserEvent) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaUserEvent
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleCloudDiscoveryengineV1betaUserInfo: Information of an end user.
@@ -13732,9 +14833,9 @@ type GoogleCloudDiscoveryengineV1betaUserInfo struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleCloudDiscoveryengineV1betaUserInfo) MarshalJSON() ([]byte, error) {
+func (s GoogleCloudDiscoveryengineV1betaUserInfo) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleCloudDiscoveryengineV1betaUserInfo
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleLongrunningCancelOperationRequest: The request message for
@@ -13766,9 +14867,9 @@ type GoogleLongrunningListOperationsResponse struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleLongrunningListOperationsResponse) MarshalJSON() ([]byte, error) {
+func (s GoogleLongrunningListOperationsResponse) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleLongrunningListOperationsResponse
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleLongrunningOperation: This resource represents a long-running
@@ -13813,9 +14914,9 @@ type GoogleLongrunningOperation struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleLongrunningOperation) MarshalJSON() ([]byte, error) {
+func (s GoogleLongrunningOperation) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleLongrunningOperation
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleProtobufEmpty: A generic empty message that you can re-use to avoid
@@ -13857,9 +14958,9 @@ type GoogleRpcStatus struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleRpcStatus) MarshalJSON() ([]byte, error) {
+func (s GoogleRpcStatus) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleRpcStatus
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 // GoogleTypeDate: Represents a whole or partial calendar date, such as a
@@ -13895,9 +14996,9 @@ type GoogleTypeDate struct {
 	NullFields []string `json:"-"`
 }
 
-func (s *GoogleTypeDate) MarshalJSON() ([]byte, error) {
+func (s GoogleTypeDate) MarshalJSON() ([]byte, error) {
 	type NoMethod GoogleTypeDate
-	return gensupport.MarshalJSON(NoMethod(*s), s.ForceSendFields, s.NullFields)
+	return gensupport.MarshalJSON(NoMethod(s), s.ForceSendFields, s.NullFields)
 }
 
 type ProjectsProvisionCall struct {
@@ -16444,6 +17545,214 @@ func (c *ProjectsLocationsCollectionsDataStoresBranchesOperationsListCall) Pages
 		}
 		c.PageToken(x.NextPageToken)
 	}
+}
+
+type ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall struct {
+	s                                                                  *Service
+	parent                                                             string
+	googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest
+	urlParams_                                                         gensupport.URLParams
+	ctx_                                                               context.Context
+	header_                                                            http.Header
+}
+
+// Import: Imports CompletionSuggestions for a DataStore.
+//
+//   - parent: The parent data store resource name for which to import customer
+//     autocomplete suggestions. Follows pattern
+//     `projects/*/locations/*/collections/*/dataStores/*`.
+func (r *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsService) Import(parent string, googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest) *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall {
+	c := &ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.parent = parent
+	c.googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest = googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse for more
+// details.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall) Fields(s ...googleapi.Field) *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// Context sets the context to be used in this call's Do method.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall) Context(ctx context.Context) *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns a http.Header that can be modified by the caller to add
+// headers to the request.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := gensupport.SetHeaders(c.s.userAgent(), "application/json", c.header_)
+	var body io.Reader = nil
+	body, err := googleapi.WithoutDataWrapper.JSONReader(c.googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest)
+	if err != nil {
+		return nil, err
+	}
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "v1beta/{+parent}/completionSuggestions:import")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("POST", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	googleapi.Expand(req.URL, map[string]string{
+		"parent": c.parent,
+	})
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "discoveryengine.projects.locations.collections.dataStores.completionSuggestions.import" call.
+// Any non-2xx status code is an error. Response headers are in either
+// *GoogleLongrunningOperation.ServerResponse.Header or (if a response was
+// returned at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was because
+// http.StatusNotModified was returned.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsImportCall) Do(opts ...googleapi.CallOption) (*GoogleLongrunningOperation, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &GoogleLongrunningOperation{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+type ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall struct {
+	s                                                                 *Service
+	parent                                                            string
+	googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaPurgeCompletionSuggestionsRequest
+	urlParams_                                                        gensupport.URLParams
+	ctx_                                                              context.Context
+	header_                                                           http.Header
+}
+
+// Purge: Permanently deletes all CompletionSuggestions for a DataStore.
+//
+//   - parent: The parent data store resource name for which to purge completion
+//     suggestions. Follows pattern
+//     projects/*/locations/*/collections/*/dataStores/*.
+func (r *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsService) Purge(parent string, googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaPurgeCompletionSuggestionsRequest) *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall {
+	c := &ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.parent = parent
+	c.googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest = googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse for more
+// details.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall) Fields(s ...googleapi.Field) *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// Context sets the context to be used in this call's Do method.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall) Context(ctx context.Context) *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns a http.Header that can be modified by the caller to add
+// headers to the request.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := gensupport.SetHeaders(c.s.userAgent(), "application/json", c.header_)
+	var body io.Reader = nil
+	body, err := googleapi.WithoutDataWrapper.JSONReader(c.googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest)
+	if err != nil {
+		return nil, err
+	}
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "v1beta/{+parent}/completionSuggestions:purge")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("POST", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	googleapi.Expand(req.URL, map[string]string{
+		"parent": c.parent,
+	})
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "discoveryengine.projects.locations.collections.dataStores.completionSuggestions.purge" call.
+// Any non-2xx status code is an error. Response headers are in either
+// *GoogleLongrunningOperation.ServerResponse.Header or (if a response was
+// returned at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was because
+// http.StatusNotModified was returned.
+func (c *ProjectsLocationsCollectionsDataStoresCompletionSuggestionsPurgeCall) Do(opts ...googleapi.CallOption) (*GoogleLongrunningOperation, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &GoogleLongrunningOperation{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
 }
 
 type ProjectsLocationsCollectionsDataStoresControlsCreateCall struct {
@@ -29182,6 +30491,214 @@ func (c *ProjectsLocationsDataStoresBranchesOperationsListCall) Pages(ctx contex
 	}
 }
 
+type ProjectsLocationsDataStoresCompletionSuggestionsImportCall struct {
+	s                                                                  *Service
+	parent                                                             string
+	googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest
+	urlParams_                                                         gensupport.URLParams
+	ctx_                                                               context.Context
+	header_                                                            http.Header
+}
+
+// Import: Imports CompletionSuggestions for a DataStore.
+//
+//   - parent: The parent data store resource name for which to import customer
+//     autocomplete suggestions. Follows pattern
+//     `projects/*/locations/*/collections/*/dataStores/*`.
+func (r *ProjectsLocationsDataStoresCompletionSuggestionsService) Import(parent string, googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaImportCompletionSuggestionsRequest) *ProjectsLocationsDataStoresCompletionSuggestionsImportCall {
+	c := &ProjectsLocationsDataStoresCompletionSuggestionsImportCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.parent = parent
+	c.googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest = googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse for more
+// details.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsImportCall) Fields(s ...googleapi.Field) *ProjectsLocationsDataStoresCompletionSuggestionsImportCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// Context sets the context to be used in this call's Do method.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsImportCall) Context(ctx context.Context) *ProjectsLocationsDataStoresCompletionSuggestionsImportCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns a http.Header that can be modified by the caller to add
+// headers to the request.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsImportCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsImportCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := gensupport.SetHeaders(c.s.userAgent(), "application/json", c.header_)
+	var body io.Reader = nil
+	body, err := googleapi.WithoutDataWrapper.JSONReader(c.googleclouddiscoveryenginev1betaimportcompletionsuggestionsrequest)
+	if err != nil {
+		return nil, err
+	}
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "v1beta/{+parent}/completionSuggestions:import")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("POST", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	googleapi.Expand(req.URL, map[string]string{
+		"parent": c.parent,
+	})
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "discoveryengine.projects.locations.dataStores.completionSuggestions.import" call.
+// Any non-2xx status code is an error. Response headers are in either
+// *GoogleLongrunningOperation.ServerResponse.Header or (if a response was
+// returned at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was because
+// http.StatusNotModified was returned.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsImportCall) Do(opts ...googleapi.CallOption) (*GoogleLongrunningOperation, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &GoogleLongrunningOperation{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+type ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall struct {
+	s                                                                 *Service
+	parent                                                            string
+	googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaPurgeCompletionSuggestionsRequest
+	urlParams_                                                        gensupport.URLParams
+	ctx_                                                              context.Context
+	header_                                                           http.Header
+}
+
+// Purge: Permanently deletes all CompletionSuggestions for a DataStore.
+//
+//   - parent: The parent data store resource name for which to purge completion
+//     suggestions. Follows pattern
+//     projects/*/locations/*/collections/*/dataStores/*.
+func (r *ProjectsLocationsDataStoresCompletionSuggestionsService) Purge(parent string, googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest *GoogleCloudDiscoveryengineV1betaPurgeCompletionSuggestionsRequest) *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall {
+	c := &ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.parent = parent
+	c.googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest = googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse for more
+// details.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall) Fields(s ...googleapi.Field) *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// Context sets the context to be used in this call's Do method.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall) Context(ctx context.Context) *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns a http.Header that can be modified by the caller to add
+// headers to the request.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := gensupport.SetHeaders(c.s.userAgent(), "application/json", c.header_)
+	var body io.Reader = nil
+	body, err := googleapi.WithoutDataWrapper.JSONReader(c.googleclouddiscoveryenginev1betapurgecompletionsuggestionsrequest)
+	if err != nil {
+		return nil, err
+	}
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "v1beta/{+parent}/completionSuggestions:purge")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("POST", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	googleapi.Expand(req.URL, map[string]string{
+		"parent": c.parent,
+	})
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "discoveryengine.projects.locations.dataStores.completionSuggestions.purge" call.
+// Any non-2xx status code is an error. Response headers are in either
+// *GoogleLongrunningOperation.ServerResponse.Header or (if a response was
+// returned at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was because
+// http.StatusNotModified was returned.
+func (c *ProjectsLocationsDataStoresCompletionSuggestionsPurgeCall) Do(opts ...googleapi.CallOption) (*GoogleLongrunningOperation, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &GoogleLongrunningOperation{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
 type ProjectsLocationsDataStoresControlsCreateCall struct {
 	s                                       *Service
 	parent                                  string
@@ -34558,6 +36075,116 @@ func (c *ProjectsLocationsDataStoresUserEventsWriteCall) Do(opts ...googleapi.Ca
 	return ret, nil
 }
 
+type ProjectsLocationsEvaluationsOperationsGetCall struct {
+	s            *Service
+	name         string
+	urlParams_   gensupport.URLParams
+	ifNoneMatch_ string
+	ctx_         context.Context
+	header_      http.Header
+}
+
+// Get: Gets the latest state of a long-running operation. Clients can use this
+// method to poll the operation result at intervals as recommended by the API
+// service.
+//
+// - name: The name of the operation resource.
+func (r *ProjectsLocationsEvaluationsOperationsService) Get(name string) *ProjectsLocationsEvaluationsOperationsGetCall {
+	c := &ProjectsLocationsEvaluationsOperationsGetCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.name = name
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse for more
+// details.
+func (c *ProjectsLocationsEvaluationsOperationsGetCall) Fields(s ...googleapi.Field) *ProjectsLocationsEvaluationsOperationsGetCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// IfNoneMatch sets an optional parameter which makes the operation fail if the
+// object's ETag matches the given value. This is useful for getting updates
+// only after the object has changed since the last request.
+func (c *ProjectsLocationsEvaluationsOperationsGetCall) IfNoneMatch(entityTag string) *ProjectsLocationsEvaluationsOperationsGetCall {
+	c.ifNoneMatch_ = entityTag
+	return c
+}
+
+// Context sets the context to be used in this call's Do method.
+func (c *ProjectsLocationsEvaluationsOperationsGetCall) Context(ctx context.Context) *ProjectsLocationsEvaluationsOperationsGetCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns a http.Header that can be modified by the caller to add
+// headers to the request.
+func (c *ProjectsLocationsEvaluationsOperationsGetCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *ProjectsLocationsEvaluationsOperationsGetCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := gensupport.SetHeaders(c.s.userAgent(), "", c.header_)
+	if c.ifNoneMatch_ != "" {
+		reqHeaders.Set("If-None-Match", c.ifNoneMatch_)
+	}
+	var body io.Reader = nil
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "v1beta/{+name}")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("GET", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	googleapi.Expand(req.URL, map[string]string{
+		"name": c.name,
+	})
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "discoveryengine.projects.locations.evaluations.operations.get" call.
+// Any non-2xx status code is an error. Response headers are in either
+// *GoogleLongrunningOperation.ServerResponse.Header or (if a response was
+// returned at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was because
+// http.StatusNotModified was returned.
+func (c *ProjectsLocationsEvaluationsOperationsGetCall) Do(opts ...googleapi.CallOption) (*GoogleLongrunningOperation, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &GoogleLongrunningOperation{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
 type ProjectsLocationsGroundingConfigsCheckCall struct {
 	s                                                     *Service
 	groundingConfig                                       string
@@ -35015,6 +36642,116 @@ func (c *ProjectsLocationsRankingConfigsRankCall) Do(opts ...googleapi.CallOptio
 		return nil, gensupport.WrapError(err)
 	}
 	ret := &GoogleCloudDiscoveryengineV1betaRankResponse{
+		ServerResponse: googleapi.ServerResponse{
+			Header:         res.Header,
+			HTTPStatusCode: res.StatusCode,
+		},
+	}
+	target := &ret
+	if err := gensupport.DecodeResponse(target, res); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+type ProjectsLocationsSampleQuerySetsOperationsGetCall struct {
+	s            *Service
+	name         string
+	urlParams_   gensupport.URLParams
+	ifNoneMatch_ string
+	ctx_         context.Context
+	header_      http.Header
+}
+
+// Get: Gets the latest state of a long-running operation. Clients can use this
+// method to poll the operation result at intervals as recommended by the API
+// service.
+//
+// - name: The name of the operation resource.
+func (r *ProjectsLocationsSampleQuerySetsOperationsService) Get(name string) *ProjectsLocationsSampleQuerySetsOperationsGetCall {
+	c := &ProjectsLocationsSampleQuerySetsOperationsGetCall{s: r.s, urlParams_: make(gensupport.URLParams)}
+	c.name = name
+	return c
+}
+
+// Fields allows partial responses to be retrieved. See
+// https://developers.google.com/gdata/docs/2.0/basics#PartialResponse for more
+// details.
+func (c *ProjectsLocationsSampleQuerySetsOperationsGetCall) Fields(s ...googleapi.Field) *ProjectsLocationsSampleQuerySetsOperationsGetCall {
+	c.urlParams_.Set("fields", googleapi.CombineFields(s))
+	return c
+}
+
+// IfNoneMatch sets an optional parameter which makes the operation fail if the
+// object's ETag matches the given value. This is useful for getting updates
+// only after the object has changed since the last request.
+func (c *ProjectsLocationsSampleQuerySetsOperationsGetCall) IfNoneMatch(entityTag string) *ProjectsLocationsSampleQuerySetsOperationsGetCall {
+	c.ifNoneMatch_ = entityTag
+	return c
+}
+
+// Context sets the context to be used in this call's Do method.
+func (c *ProjectsLocationsSampleQuerySetsOperationsGetCall) Context(ctx context.Context) *ProjectsLocationsSampleQuerySetsOperationsGetCall {
+	c.ctx_ = ctx
+	return c
+}
+
+// Header returns a http.Header that can be modified by the caller to add
+// headers to the request.
+func (c *ProjectsLocationsSampleQuerySetsOperationsGetCall) Header() http.Header {
+	if c.header_ == nil {
+		c.header_ = make(http.Header)
+	}
+	return c.header_
+}
+
+func (c *ProjectsLocationsSampleQuerySetsOperationsGetCall) doRequest(alt string) (*http.Response, error) {
+	reqHeaders := gensupport.SetHeaders(c.s.userAgent(), "", c.header_)
+	if c.ifNoneMatch_ != "" {
+		reqHeaders.Set("If-None-Match", c.ifNoneMatch_)
+	}
+	var body io.Reader = nil
+	c.urlParams_.Set("alt", alt)
+	c.urlParams_.Set("prettyPrint", "false")
+	urls := googleapi.ResolveRelative(c.s.BasePath, "v1beta/{+name}")
+	urls += "?" + c.urlParams_.Encode()
+	req, err := http.NewRequest("GET", urls, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header = reqHeaders
+	googleapi.Expand(req.URL, map[string]string{
+		"name": c.name,
+	})
+	return gensupport.SendRequest(c.ctx_, c.s.client, req)
+}
+
+// Do executes the "discoveryengine.projects.locations.sampleQuerySets.operations.get" call.
+// Any non-2xx status code is an error. Response headers are in either
+// *GoogleLongrunningOperation.ServerResponse.Header or (if a response was
+// returned at all) in error.(*googleapi.Error).Header. Use
+// googleapi.IsNotModified to check whether the returned error was because
+// http.StatusNotModified was returned.
+func (c *ProjectsLocationsSampleQuerySetsOperationsGetCall) Do(opts ...googleapi.CallOption) (*GoogleLongrunningOperation, error) {
+	gensupport.SetOptions(c.urlParams_, opts...)
+	res, err := c.doRequest("json")
+	if res != nil && res.StatusCode == http.StatusNotModified {
+		if res.Body != nil {
+			res.Body.Close()
+		}
+		return nil, gensupport.WrapError(&googleapi.Error{
+			Code:   res.StatusCode,
+			Header: res.Header,
+		})
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer googleapi.CloseBody(res)
+	if err := googleapi.CheckResponse(res); err != nil {
+		return nil, gensupport.WrapError(err)
+	}
+	ret := &GoogleLongrunningOperation{
 		ServerResponse: googleapi.ServerResponse{
 			Header:         res.Header,
 			HTTPStatusCode: res.StatusCode,

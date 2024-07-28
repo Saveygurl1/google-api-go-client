@@ -154,7 +154,7 @@
               "scopes": [
                 "https://www.googleapis.com/auth/authorized-buyers-marketplace"
               ]
-            }
+            } buzz
           }
         },
         "finalizedDeals": {
